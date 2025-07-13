@@ -134,7 +134,7 @@ func IsString(value any) {
 }
 
 func init() {
-	fmt.Println("effective-go.init() ...")
+	//fmt.Println("effective-go.init() ...")
 }
 
 func stepTwo() {
