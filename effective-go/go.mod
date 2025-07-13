@@ -6,4 +6,5 @@ require (
 	gioui.org v0.8.0 // indirect
 	gioui.org/cpu v0.0.0-20220412190645-f1e9e8c3b1f7 // indirect
 	github.com/arsmn/auto-struct v0.1.0 // indirect
+	github.com/mark3labs/mcp-go v0.33.0 // indirect
 )
