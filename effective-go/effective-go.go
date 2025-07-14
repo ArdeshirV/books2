@@ -32,8 +32,8 @@ func main() {
 func stepSix() {
 	printTitle("stepSix\n")
 
-	//stopChan := make(chan bool)
 	time.Sleep(time.Millisecond * 100)
+	//stopChan := make(chan bool)
 	const numWorkers = 4
 	dataChan := make(chan rune, 4)
 
