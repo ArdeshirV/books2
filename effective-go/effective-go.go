@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 	"sync"
-	//"time"
+	"time"
 )
 
 func printTitle(title string) {
@@ -33,7 +33,17 @@ func stepSix() {
 	printTitle("stepSix\n")
 
 	//stopChan := make(chan bool)
+	time.Sleep(time.Millisecond * 100)
 	dataChan := make(chan rune)
+
+	for range 4 {
+		go func() {
+			for {
+				data := <-dataChan
+				fmt.Print(string(data))
+			}
+		}()
+	}
 
 	var wg sync.WaitGroup
 	wg.Add(1)
@@ -44,15 +54,9 @@ func stepSix() {
 		wg.Done()
 	}()
 
-	go func() {
-		for {
-			data := <-dataChan
-			fmt.Print(string(data))
-		}
-	}()
 	//<-stopChan
-	//time.Sleep(time.Millisecond * 1000)
 	wg.Wait()
+	//time.Sleep(time.Millisecond * 100)
 	fmt.Print("Finished\n\n")
 }
 
