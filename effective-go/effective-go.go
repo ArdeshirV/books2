@@ -34,29 +34,30 @@ func stepSix() {
 
 	//stopChan := make(chan bool)
 	time.Sleep(time.Millisecond * 100)
+	const numWorkers = 4
 	dataChan := make(chan rune)
 
-	for range 4 {
+	var wg sync.WaitGroup
+	wg.Add(numWorkers)
+	for range numWorkers {
 		go func() {
-			for {
-				data := <-dataChan
+			defer wg.Done()
+			for data := range dataChan {
 				fmt.Print(string(data))
 			}
 		}()
 	}
 
-	var wg sync.WaitGroup
-	wg.Add(1)
 	go func() {
 		for c := 'A'; c <= 'Z'; c++ {
 			dataChan <- c
 		}
-		wg.Done()
+		close(dataChan)
 	}()
 
 	//<-stopChan
 	wg.Wait()
-	time.Sleep(time.Millisecond * 100) // TODO: How to find a solution to remove this line without side effect?
+	//time.Sleep(time.Millisecond * 100) // TODO: How to find a solution to remove this line without side effect?
 	fmt.Print("Finished\n\n")
 }
 
