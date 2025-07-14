@@ -35,7 +35,7 @@ func stepSix() {
 	//stopChan := make(chan bool)
 	time.Sleep(time.Millisecond * 100)
 	const numWorkers = 4
-	dataChan := make(chan rune)
+	dataChan := make(chan rune, 4)
 
 	var wg sync.WaitGroup
 	wg.Add(numWorkers)
