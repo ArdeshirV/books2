@@ -56,7 +56,7 @@ func stepSix() {
 
 	//<-stopChan
 	wg.Wait()
-	//time.Sleep(time.Millisecond * 100)
+	time.Sleep(time.Millisecond * 100) // TODO: How to find a solution to remove this line without side effect?
 	fmt.Print("Finished\n\n")
 }
 
