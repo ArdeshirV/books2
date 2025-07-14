@@ -43,7 +43,7 @@ func stepSix() {
 		go func() {
 			defer wg.Done()
 			for data := range dataChan {
-				fmt.Print(string(data))
+				fmt.Print(string(data), " ")
 			}
 		}()
 	}
@@ -58,7 +58,7 @@ func stepSix() {
 	//<-stopChan
 	wg.Wait()
 	//time.Sleep(time.Millisecond * 100) // TODO: How to find a solution to remove this line without side effect?
-	fmt.Print("Finished\n\n")
+	fmt.Print(" Finished\n\n")
 }
 
 func stepFive() {
