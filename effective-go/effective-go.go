@@ -28,7 +28,7 @@ func main() {
 }
 
 func stepSix() {
-	printTitle("stepSix\n\n")
+	printTitle("stepSix\n")
 
 	fmt.Printf("Hello, World!\n\n")
 }
@@ -294,3 +294,4 @@ func (ce *CustomEntity) SetOwner(owner string) {
 func (ce CustomEntity) String() string {
 	return ce.owner
 }
+
