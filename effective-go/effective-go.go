@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"os"
+	"sync"
+	//"time"
 )
 
 func printTitle(title string) {
@@ -30,7 +32,28 @@ func main() {
 func stepSix() {
 	printTitle("stepSix\n")
 
-	fmt.Printf("Hello, World!\n\n")
+	//stopChan := make(chan bool)
+	dataChan := make(chan rune)
+
+	var wg sync.WaitGroup
+	wg.Add(1)
+	go func() {
+		for c := 'A'; c <= 'Z'; c++ {
+			dataChan <- c
+		}
+		wg.Done()
+	}()
+
+	go func() {
+		for {
+			data := <-dataChan
+			fmt.Print(string(data))
+		}
+	}()
+	//<-stopChan
+	//time.Sleep(time.Millisecond * 1000)
+	wg.Wait()
+	fmt.Print("Finished\n\n")
 }
 
 func stepFive() {
