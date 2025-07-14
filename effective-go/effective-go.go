@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"os"
-	"strings"
 )
 
 func printTitle(title string) {
@@ -295,4 +294,3 @@ func (ce *CustomEntity) SetOwner(owner string) {
 func (ce CustomEntity) String() string {
 	return ce.owner
 }
-
