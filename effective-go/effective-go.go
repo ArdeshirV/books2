@@ -26,7 +26,12 @@ func main() {
 	//stepThree()
 	//stepFour()
 	//stepFive()
-	stepSix()
+	//stepSix()
+	stepSeven()
+}
+
+func stepSeven() {
+	printTitle("stepSeven: a web server\n")
 }
 
 func stepSix() {
