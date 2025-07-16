@@ -33,7 +33,14 @@ func main() {
 func stepSeven() {
 	printTitle("stepSeven: a web server\n")
 
-	fmt.Println("Just 4 test")
+	end := make(chan bool)
+	go func() {
+		time.Sleep(time.Millisecond * 100)
+		end <- true
+	}()
+	<-end
+	fmt.Println("Finished")
+
 }
 
 func stepSix() {
