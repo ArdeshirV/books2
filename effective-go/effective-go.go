@@ -30,8 +30,8 @@ func main() {
 	//stepThree()
 	//stepFour()
 	//stepFive()
-	//stepSix()
-	stepSeven()
+	stepSix()
+	//stepSeven()
 }
 
 func stepSeven() {
@@ -89,32 +89,33 @@ func stepSix() {
 	printTitle("stepSix\n")
 
 	time.Sleep(time.Millisecond * 100)
-	//stopChan := make(chan bool)
 	const numWorkers = 4
-	dataChan := make(chan rune, 4)
 
-	var wg sync.WaitGroup
-	wg.Add(numWorkers)
-	for range numWorkers {
-		go func() {
-			defer wg.Done()
-			for data := range dataChan {
-				fmt.Print(string(data), " ")
-			}
-		}()
-	}
-
-	go func() {
-		for c := 'A'; c <= 'Z'; c++ {
-			dataChan <- c
+	for range 40 {
+		dataChan := make(chan rune, 4)
+		var wg sync.WaitGroup
+		colors := [4]string{"\033[1;34m", "\033[1;32m", "\033[1;33m", "\033[1;35m"}
+		wg.Add(numWorkers)
+		for i := range numWorkers {
+			go func(index int) {
+				defer wg.Done()
+				for data := range dataChan {
+					time.Sleep(time.Millisecond * 100)
+					fmt.Print(colors[index], string(data), "\033[0m ")
+				}
+			}(i)
 		}
-		close(dataChan)
-	}()
 
-	//<-stopChan
-	wg.Wait()
-	//time.Sleep(time.Millisecond * 100) // TODO: How to find a solution to remove this line without side effect?
-	fmt.Print(" Finished\n\n")
+		go func() {
+			for c := 'A'; c <= 'Z'; c++ {
+				dataChan <- c
+			}
+			close(dataChan)
+		}()
+
+		wg.Wait()
+		fmt.Println()
+	}
 }
 
 func stepFive() {
