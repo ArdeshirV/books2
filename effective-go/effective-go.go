@@ -32,6 +32,8 @@ func main() {
 
 func stepSeven() {
 	printTitle("stepSeven: a web server\n")
+
+	fmt.Println("Just 4 test")
 }
 
 func stepSix() {
