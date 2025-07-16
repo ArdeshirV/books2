@@ -379,3 +379,6 @@ func (ce *CustomEntity) SetOwner(owner string) {
 func (ce CustomEntity) String() string {
 	return ce.owner
 }
+
+func (ce CustomEntity) SetOwner(owner string) {
+}
