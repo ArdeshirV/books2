@@ -23,8 +23,7 @@ func mainChapterThree() {
 	fmt.Printf("  Chapter Three: \n\n")
 	fmt.Println("Hello World")
 	Integrate("Hello from mainChapterThree +/-")
-	// TODO: add your new code here
-
+	
 }
 
 // Integrate ax^2+bx+c
