@@ -16,7 +16,7 @@ func main() {
 	//mainChapterOne()
 	//mainChapterTwo()
 	mainReviewChapterOneAndTwo()
-	mainChapterThree()
+	//mainChapterThree()
 }
 
 // Chapter three
@@ -33,7 +33,8 @@ func Integrate(expr string) float64 {
 }
 
 func mainReviewChapterOneAndTwo() {
-	printTitle("Review chapter one and two")
+	printTitle("Review chapter one and two\n")
+	fmt.Println("Output goes here.")
 }
 
 // find n max of array
