@@ -34,7 +34,19 @@ func Integrate(expr string) float64 {
 
 func mainReviewChapterOneAndTwo() {
 	printTitle("Review chapter one and two\n")
-	fmt.Println("Output goes here.")
+
+	const (
+		a1 = (iota + 1) * 1024
+		a2
+		a3
+		a4
+		_
+		a6
+	)
+	fmt.Printf("a1 = %v, a6 = %v\n", a1, a6)
+
+	arr1 := []uint8{0: 1, 2: 2, 1: 3, 3: 4}
+	fmt.Printf("%v\n", arr1)
 }
 
 // find n max of array
