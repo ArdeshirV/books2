@@ -73,6 +73,22 @@ func mainReviewChapterOneAndTwo() {
 	}(1, 2, add)
 	fmt.Println("res = ", res)
 
+	p1 := player{
+		name: "nightworlf",
+		hp:   100,
+	}
+	fmt.Println("before hit:", p1.hp)
+	p1.hit()
+	fmt.Println("After hit:", p1.hp)
+}
+
+type player struct {
+	name string
+	hp   int
+}
+
+func (p *player) hit() {
+	p.hp--
 }
 
 // find n max of array
