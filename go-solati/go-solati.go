@@ -47,6 +47,32 @@ func mainReviewChapterOneAndTwo() {
 
 	arr1 := []uint8{0: 1, 2: 2, 1: 3, 3: 4}
 	fmt.Printf("%v\n", arr1)
+
+	m1 := make(map[string]string)
+	m1["شنبه"] = "saturday"
+	m1["یکشنبه"] = "sunday"
+	m1["دوشنبه"] = "monday"
+	m1["سهشنبه"] = "tuesday"
+	for k, v := range m1 {
+		fmt.Printf("%v:%v\n", k, v)
+	}
+	k := "شنبه"
+	fmt.Println(k, "=", m1[k])
+	value, ok := m1["حمعه"]
+	fmt.Printf("value = %v, ok = %v\n", value, ok)
+
+	type MyType int
+	var m MyType
+	m = 9
+	fmt.Println(m)
+
+	type operator = func(int, int) int
+	add := func(a, b int) int { return a + b }
+	res := func(a, b int, op operator) int {
+		return op(a, b)
+	}(1, 2, add)
+	fmt.Println("res = ", res)
+
 }
 
 // find n max of array
