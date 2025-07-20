@@ -15,6 +15,7 @@ func main() {
 
 	//mainChapterOne()
 	//mainChapterTwo()
+	mainReviewChapterOneAndTwo()
 	mainChapterThree()
 }
 
@@ -23,13 +24,16 @@ func mainChapterThree() {
 	fmt.Printf("  Chapter Three: \n\n")
 	fmt.Println("Hello World")
 	Integrate("Hello from mainChapterThree +/-")
-
 }
 
 // Integrate ax^2+bx+c
 func Integrate(expr string) float64 {
 	fmt.Println(expr)
 	return 0.0
+}
+
+func mainReviewChapterOneAndTwo() {
+	printTitle("Review chapter one and two")
 }
 
 // find n max of array
@@ -286,6 +290,10 @@ func PerformTitle() {
 	bookName := "The Go programming language reference"
 	title := "\n    %sMy Practices about \"%s%s%s\" %sʕ◔ϖ◔ʔ%s\n\n"
 	fmt.Printf(title, MAGENTA, BMAGENTA, bookName, MAGENTA, BGREEN, TEAL)
+}
+
+func printTitle(title string) {
+	fmt.Printf("\n  \033[1;36m%s\033[0;36m\n", title)
 }
 
 const (
