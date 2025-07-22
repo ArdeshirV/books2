@@ -22,7 +22,25 @@ func main() {
 	//mainChapterThree()
 	//mainChannels()
 	//mainChannels2()
-	mainChannels3()
+	//mainChannels3()
+	UsingRecover()
+}
+
+type String string
+
+func (s *String) Write(b []byte) (n int, err error) {
+	*s += String(string(b))
+	return len(b), nil
+}
+
+func UsingRecover() {
+	defer func() {
+		if rec := recover(); rec != nil {
+			fmt.Println("Recovered from:", rec)
+		}
+	}()
+
+	panic("Panic happened")
 }
 
 func mainChannels3() {
