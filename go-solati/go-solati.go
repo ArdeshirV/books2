@@ -4,6 +4,8 @@ package main
 import (
 	"fmt"
 	"sort"
+	"sync"
+	"time"
 )
 
 // Main entry point
@@ -80,6 +82,63 @@ func mainReviewChapterOneAndTwo() {
 	fmt.Println("before hit:", p1.hp)
 	p1.hit()
 	fmt.Println("After hit:", p1.hp)
+
+	zebel()
+}
+
+func zebel() {
+	arr := []int{1, 20, 33, 1, 12, 332, 4, 239, 4, 23, 434, 9, 46, 90, 95, 439, 3, 3, 0, 99}
+	fmt.Println(arr)
+	total1 := 0
+	now1 := time.Now()
+	for range 1000 {
+		total1 += addAllOne(arr)
+	}
+	fmt.Println("Total: ", total1)
+	fmt.Println("Duration: ", time.Since(now1))
+	total2 := 0
+	now2 := time.Now()
+	var wg sync.WaitGroup
+	wg.Add(4)
+	go func() {
+		for range 250 {
+			total2 += addAllOne(arr)
+		}
+		wg.Done()
+	}()
+	go func() {
+		for range 250 {
+			total2 += addAllOne(arr)
+		}
+		wg.Done()
+	}()
+	go func() {
+		for range 250 {
+			total2 += addAllOne(arr)
+		}
+		wg.Done()
+	}()
+	go func() {
+		for range 250 {
+			total2 += addAllOne(arr)
+		}
+		wg.Done()
+	}()
+	wg.Wait()
+	fmt.Println("Total: ", total2)
+	fmt.Println("Duration: ", time.Since(now2))
+}
+
+func addAllOne(a []int) int {
+	total := 0
+	t := 0
+	for range 1000000 {
+		for _, v := range a {
+			total += v
+		}
+		t += total
+	}
+	return total
 }
 
 type player struct {
