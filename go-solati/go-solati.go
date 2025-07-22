@@ -33,7 +33,7 @@ func mainChannels() {
 }
 
 func DoHeavyTask(c chan int) {
-	time.Sleep(1 * time.Second)
+	time.Sleep(200 * time.Millisecond)
 	data := <-c
 	fmt.Printf("%v ", data)
 }
