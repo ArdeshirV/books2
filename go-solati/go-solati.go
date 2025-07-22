@@ -3,6 +3,7 @@ package main
 
 import (
 	"fmt"
+	"runtime"
 	"sort"
 	"sync"
 	"time"
@@ -19,10 +20,64 @@ func main() {
 	//mainChapterTwo()
 	mainReviewChapterOneAndTwo()
 	//mainChapterThree()
-	mainChannels()
+	//mainChannels()
+	//mainChannels2()
+	mainChannels3()
 }
 
-func mainChannels() {
+func mainChannels3() {
+	n := 1000000
+	RegisteredUsers := make(chan int, n)
+	limit := make(chan bool, runtime.NumCPU())
+	now := time.Now()
+
+	for i := 1; i <= n; i++ {
+		go func(in int) {
+			limit <- true
+			RegisteredUsers <- in
+			<-limit
+		}(i)
+	}
+
+	for n > 0 {
+		<-RegisteredUsers
+		n--
+	}
+
+	fmt.Println("Number of CPUs:", runtime.NumCPU())
+	fmt.Println("Durations:", time.Since(now))
+	fmt.Printf("%#T\n", time.Second)
+}
+
+func mainChannels2() {
+	c := make(chan int, 7)
+	go func() {
+		for i := 100; i >= 0; i-- {
+			time.Sleep(time.Millisecond * 300)
+			c <- i
+		}
+	}()
+	go func() {
+		for i := 1000; i >= 0; i-- {
+			time.Sleep(time.Millisecond * 100)
+			c <- i
+		}
+	}()
+	for data := range c {
+		fmt.Print(data, " ")
+		if data == 0 {
+			//close(c)
+			break
+		}
+	}
+	fmt.Printf("\n%#T, len(c) = %v\n", c, len(c))
+	c <- 10
+	fmt.Printf("\n%#T, len(c) = %v\n", c, len(c))
+	fmt.Println()
+	close(c)
+}
+
+func mainChannels1() {
 	c := make(chan int, 4)
 	for i := range 100 {
 		c <- i
