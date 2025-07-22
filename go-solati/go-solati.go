@@ -19,6 +19,23 @@ func main() {
 	//mainChapterTwo()
 	mainReviewChapterOneAndTwo()
 	//mainChapterThree()
+	mainChannels()
+}
+
+func mainChannels() {
+	c := make(chan int, 4)
+	for i := range 100 {
+		c <- i
+		go DoHeavyTask(c)
+	}
+	close(c)
+	fmt.Println()
+}
+
+func DoHeavyTask(c chan int) {
+	time.Sleep(1 * time.Second)
+	data := <-c
+	fmt.Printf("%v ", data)
 }
 
 // Chapter three
@@ -83,9 +100,8 @@ func mainReviewChapterOneAndTwo() {
 	p1.hit()
 	fmt.Println("After hit:", p1.hp)
 
-	zebel()
+	//zebel()
 }
-
 func zebel() {
 	arr := []int{1, 20, 33, 1, 12, 332, 4, 239, 4, 23, 434, 9, 46, 90, 95, 439, 3, 3, 0, 99}
 	fmt.Println(arr)
