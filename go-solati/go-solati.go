@@ -23,7 +23,16 @@ func main() {
 	//mainChannels()
 	//mainChannels2()
 	//mainChannels3()//
-	UsingRecover()
+	//UsingRecover()
+	mainANewStepForward()
+}
+
+func Add(a, b int) int {
+	return a + b
+}
+
+func mainANewStepForward() {
+	fmt.Println("A new step forward")
 }
 
 type String string
