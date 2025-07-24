@@ -30,6 +30,12 @@ func main() {
 
 func mainANewStepForward() {
 	fmt.Println("A new step forward")
+	str := "The Go Programming Language"
+	var buff []byte
+	var s String
+	s.Write([]byte(str))
+	s.Read(buff)
+	fmt.Println(s.data)
 }
 
 type String struct {
