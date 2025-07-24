@@ -43,12 +43,11 @@ func (s *String) Write(b []byte) (n int, err error) {
 }
 
 func (s *String) Read(b []byte) (n int, err error) {
-	if len(b) < len(s.data) {
+	n = copy(b, s.data[s.pos:])
+	s.pos += n
+	if s.pos >= len(s.data) {
 		err = io.EOF
 	}
-	n = max(len(b), len(s.data)) - s.pos
-	copy(b, s.data[s.pos:n])
-	s.pos += n
 	return n, err
 }
 
