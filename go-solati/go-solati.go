@@ -25,17 +25,44 @@ func main() {
 	//mainChannels2()
 	//mainChannels3()//
 	//UsingRecover()
-	mainANewStepForward()
+	//mainANewStepForward()
+	mainAncientAlphabets()
+}
+
+func mainAncientAlphabets() {
+	WriteAlphabets(0x103A0, 0x103DF)
+	WriteAlphabets(0x10B00, 0x10B3F)
+	WriteAlphabets(0x10B40, 0x10B5F)
+	WriteAlphabets(0x10B60, 0x10B7F)
+	WriteAlphabets(0xFB50, 0xFDFF)
+}
+
+func WriteAlphabets(a, b rune) {
+	for alph := a; alph <= b; alph++ {
+		fmt.Print(string(alph), " ")
+	}
+	fmt.Println()
+	fmt.Println()
 }
 
 func mainANewStepForward() {
 	fmt.Println("A new step forward")
-	str := "The Go Programming Language"
-	var buff []byte
+	str := "اردشیرThe Go Programming Language"
+	buff := make([]byte, 20)
 	var s String
 	s.Write([]byte(str))
 	s.Read(buff)
-	fmt.Println(s.data)
+	fmt.Println(string(buff))
+	for i, v := range buff {
+		fmt.Printf("[%d]=%v ", i, string(v))
+	}
+	fmt.Println()
+	r := rune(buff[4]) | rune(buff[5])<<16
+	fmt.Println(string(buff[0:12]))
+	fmt.Println(string(r))
+	fmt.Printf("%T\n", r)
+	rx := rune(194) | rune(169)<<8
+	fmt.Println("[", int(rx), "] =", string(rx))
 }
 
 type String struct {
