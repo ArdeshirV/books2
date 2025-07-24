@@ -3,6 +3,7 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"runtime"
 	"sort"
 	"sync"
@@ -31,11 +32,24 @@ func mainANewStepForward() {
 	fmt.Println("A new step forward")
 }
 
-type String string
+type String struct {
+	pos  int
+	data string
+}
 
 func (s *String) Write(b []byte) (n int, err error) {
-	*s += String(string(b))
+	s.data += string(b)
 	return len(b), nil
+}
+
+func (s *String) Read(b []byte) (n int, err error) {
+	if len(b) < len(s.data) {
+		err = io.EOF
+	}
+	n = max(len(b), len(s.data)) - s.pos
+	copy(b, s.data[s.pos:n])
+	s.pos += n
+	return n, err
 }
 
 func UsingRecover() {
@@ -44,7 +58,6 @@ func UsingRecover() {
 			fmt.Println("Recovered from:", rec)
 		}
 	}()
-
 	panic("Panic happened")
 }
 
