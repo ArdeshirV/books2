@@ -32,6 +32,7 @@ func main() {
 
 func mainWriterReader() {
 	fmt.Println("Reader & Writer")
+
 }
 
 func mainAncientAlphabets() {
@@ -61,6 +62,7 @@ func mainANewStepForward() {
 	for i, v := range buff {
 		fmt.Printf("[%d]=%v ", i, string(v))
 	}
+	fmt.Println(s)
 	fmt.Println()
 	r := rune(buff[4]) | rune(buff[5])<<16
 	fmt.Println(string(buff[0:12]))
@@ -73,6 +75,10 @@ func mainANewStepForward() {
 type String struct {
 	pos  int
 	data string
+}
+
+func (s String) String() string {
+	return s.data
 }
 
 func (s *String) Write(b []byte) (n int, err error) {
