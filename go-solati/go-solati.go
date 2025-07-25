@@ -53,8 +53,14 @@ func mainWriterReader() {
 	wx := bufio.NewWriter(&ss)
 
 	wx.WriteString("Hello, World!")
-	str, err := rx.ReadString('!')
+	wx.Flush()
+	str, err := rx.ReadString('\n')
 	fmt.Println(str, err)
+
+	scanner := bufio.NewScanner(os.Stdin)
+	fmt.Print("Enter your name: ")
+	scanner.Scan()
+	fmt.Println("Hello", scanner.Text())
 }
 
 func (s StringX) ToString() string {
