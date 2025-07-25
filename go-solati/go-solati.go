@@ -8,6 +8,7 @@ import (
 	"os"
 	"runtime"
 	"sort"
+	"strings"
 	"sync"
 	"time"
 )
@@ -29,7 +30,18 @@ func main() {
 	//UsingRecover()
 	//mainANewStepForward()
 	//mainAncientAlphabets()
-	mainWriterReader()
+	//mainWriterReader()
+	mainWriterReader2()
+}
+
+func mainWriterReader2() {
+	fmt.Println("Reader & Writer 2")
+	reader := strings.NewReader("This is a sample text")
+	scanner := bufio.NewScanner(reader)
+	scanner.Split(bufio.ScanWords)
+	for scanner.Scan() {
+		fmt.Println(scanner.Text())
+	}
 }
 
 func mainWriterReader() {
