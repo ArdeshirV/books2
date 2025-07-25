@@ -2,6 +2,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"os"
@@ -45,6 +46,15 @@ func mainWriterReader() {
 
 	r := io.TeeReader(&ss, os.Stdout)
 	io.ReadAll(r)
+	fmt.Println()
+
+	fmt.Println()
+	rx := bufio.NewReader(&ss)
+	wx := bufio.NewWriter(&ss)
+
+	wx.WriteString("Hello, World!")
+	str, err := rx.ReadString('!')
+	fmt.Println(str, err)
 }
 
 func (s StringX) ToString() string {
