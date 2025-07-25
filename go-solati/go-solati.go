@@ -32,7 +32,20 @@ func main() {
 
 func mainWriterReader() {
 	fmt.Println("Reader & Writer")
+	buff := []byte("Hello, World!")
+	//os.Stdin.Read(buff)
+	var s StringX
+	s.Write(buff)
+	fmt.Println(s)
 
+	var ss String
+	ss.Write(buff)
+	fmt.Println(ss)
+
+}
+
+func (s StringX) ToString() string {
+	return s.data
 }
 
 func mainAncientAlphabets() {
@@ -76,6 +89,8 @@ type String struct {
 	pos  int
 	data string
 }
+
+type StringX = String
 
 func (s String) String() string {
 	return s.data
