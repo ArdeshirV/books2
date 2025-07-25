@@ -4,6 +4,7 @@ package main
 import (
 	"fmt"
 	"io"
+	"os"
 	"runtime"
 	"sort"
 	"sync"
@@ -42,6 +43,8 @@ func mainWriterReader() {
 	ss.Write(buff)
 	fmt.Println(ss)
 
+	r := io.TeeReader(&ss, os.Stdout)
+	io.ReadAll(r)
 }
 
 func (s StringX) ToString() string {
