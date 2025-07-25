@@ -31,7 +31,12 @@ func main() {
 	//mainANewStepForward()
 	//mainAncientAlphabets()
 	//mainWriterReader()
-	mainWriterReader2()
+	//mainWriterReader2()
+	mainFiles()
+}
+
+func mainFiles() {
+	//
 }
 
 func mainWriterReader2() {
