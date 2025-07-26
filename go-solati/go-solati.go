@@ -5,6 +5,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"net"
 	"os"
 	"runtime"
 	"sort"
@@ -37,7 +38,36 @@ func main() {
 }
 
 func mainSockets() {
-	//
+	listner, err := net.Listen("tcp", "localhost:5060")
+	if err != nil {
+		panic(err)
+	}
+	defer listner.Close()
+
+	fmt.Println("Server started ...")
+
+	i := 1
+	for {
+		conn, err := listner.Accept()
+		if err != nil {
+			panic(err)
+		}
+		go handleConnection(conn, i)
+		i++
+	}
+}
+
+func handleConnection(conn net.Conn, i int) {
+	fmt.Println("New connections number:", i)
+	defer conn.Close()
+	buffer := make([]byte, 1024)
+	for {
+		n, err := conn.Read(buffer)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "Error in reading the connection:%v", err)
+		}
+		fmt.Printf("Client %d: %s\n", i, string(buffer[:n]))
+	}
 }
 
 func mainFiles() {
