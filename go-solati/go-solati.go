@@ -36,7 +36,30 @@ func main() {
 }
 
 func mainFiles() {
-	//
+	fmt.Println("Files in Golang")
+
+	filename := "/home/asohishn/d/sample-file.txt"
+	fmt.Println("GetPageSize() = ", os.Getpagesize())
+
+	f, err := os.Create(filename)
+	if err != nil {
+		panic(err)
+	}
+
+	_, err = io.WriteString(f, "Hello World")
+	if err != nil {
+		panic(err)
+	}
+	f.Close()
+
+	f, err = os.Open(filename)
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+
+	buff, err := io.ReadAll(f)
+	fmt.Println(string(buff))
 }
 
 func mainWriterReader2() {
