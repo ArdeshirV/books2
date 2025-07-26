@@ -65,6 +65,7 @@ func handleConnection(conn net.Conn, i int) {
 		n, err := conn.Read(buffer)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Error in reading the connection:%v", err)
+			return
 		}
 		fmt.Printf("Client %d: %s\n", i, string(buffer[:n]))
 	}
