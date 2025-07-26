@@ -10,7 +10,7 @@ var (
 
 func main() {
 	defer fmt.Print(NORMAL)
-	title := "    %sAlgorithms in %sGo%slang %sʕ◔ϖ◔ʔ%s\n\n"
+	title := "\n    %sAlgorithms in %sGo%slang %sʕ◔ϖ◔ʔ%s\n\n"
 	fmt.Printf(title, BMAGENTA, BBLUE, BLUE, BGREEN, TEAL)
 
 	mainBubbleSort1()
