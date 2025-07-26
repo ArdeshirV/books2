@@ -32,7 +32,12 @@ func main() {
 	//mainAncientAlphabets()
 	//mainWriterReader()
 	//mainWriterReader2()
-	mainFiles()
+	//mainFiles()
+	mainSockets()
+}
+
+func mainSockets() {
+	//
 }
 
 func mainFiles() {
