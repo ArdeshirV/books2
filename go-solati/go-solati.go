@@ -46,28 +46,63 @@ func mainSockets() {
 
 	fmt.Println("Server started ...")
 
-	i := 1
-	for {
-		conn, err := listner.Accept()
-		if err != nil {
-			panic(err)
+	go func() {
+		i := 1
+		for {
+			conn, err := listner.Accept()
+			if err == io.EOF {
+				fmt.Println(BGREEN, "Connection closed cleanly")
+				return
+			} else if ne, ok := err.(net.Error); ok && ne.Timeout() {
+				fmt.Println(BGREEN, "Read timeout")
+				return
+			} else if err != nil {
+				fmt.Printf("%sUnexpected error: %v%T\n", BGREEN, err, err)
+				return
+			}
+
+			go handleConnection(conn, i)
+			i++
 		}
-		go handleConnection(conn, i)
-		i++
+	}()
+
+	conn, err := net.Dial("tcp", "localhost:5060")
+	if err != nil {
+		panic(err)
+	}
+	defer conn.Close()
+
+	fmt.Println(BGREEN, "Connected ...")
+	message := ""
+	scanner := bufio.NewScanner(os.Stdin)
+	for {
+		scanner.Scan()
+		message = scanner.Text()
+		if message == "exit" {
+			return
+		}
+		fmt.Fprint(conn, BGREEN, message)
+		fmt.Print(BGREEN, ">>")
 	}
 }
 
 func handleConnection(conn net.Conn, i int) {
-	fmt.Println("New connections number:", i)
+	fmt.Println(BBLUE, "New connections number:", i)
 	defer conn.Close()
 	buffer := make([]byte, 1024)
 	for {
 		n, err := conn.Read(buffer)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Error in reading the connection:%v", err)
+		if err == io.EOF {
+			fmt.Println(BBLUE, "Connection closed cleanly")
+			return
+		} else if ne, ok := err.(net.Error); ok && ne.Timeout() {
+			fmt.Println(BBLUE, "Read timeout")
+			return
+		} else if err != nil {
+			fmt.Printf("%sUnexpected error: %v%T\n", BBLUE, err, err)
 			return
 		}
-		fmt.Printf("Client %d: %s\n", i, string(buffer[:n]))
+		fmt.Printf("%sClient %d: %s\n", BBLUE, i, string(buffer[:n]))
 	}
 }
 
