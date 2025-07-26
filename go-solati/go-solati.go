@@ -34,7 +34,13 @@ func main() {
 	//mainWriterReader()
 	//mainWriterReader2()
 	//mainFiles()
-	mainSockets()
+	//mainSockets()
+	mainWeb1()
+}
+
+func mainWeb1() {
+	fmt.Println("mainWeb1()")
+
 }
 
 func mainSockets() {
@@ -50,11 +56,19 @@ func mainSockets() {
 		i := 1
 		for {
 			conn, err := listner.Accept()
+
 			if err == io.EOF {
 				fmt.Println(BGREEN, "Connection closed cleanly")
 				return
 			} else if ne, ok := err.(net.Error); ok && ne.Timeout() {
 				fmt.Println(BGREEN, "Read timeout")
+				return
+			} else if opErr, ok := err.(*net.OpError); ok {
+				fmt.Println("Caught net.OpError:")
+				fmt.Println(" Operation:", opErr.Op)
+				fmt.Println(" Network:", opErr.Net)
+				fmt.Println(" Addr:", opErr.Addr)
+				fmt.Println(" Inner error:", opErr.Err)
 				return
 			} else if err != nil {
 				fmt.Printf("%sUnexpected error: %v%T\n", BGREEN, err, err)
@@ -72,7 +86,7 @@ func mainSockets() {
 	}
 	defer conn.Close()
 
-	fmt.Println(BGREEN, "Connected ...")
+	fmt.Println(BYELLOW, "Connected ...")
 	message := ""
 	scanner := bufio.NewScanner(os.Stdin)
 	for {
@@ -81,8 +95,8 @@ func mainSockets() {
 		if message == "exit" {
 			return
 		}
-		fmt.Fprint(conn, BGREEN, message)
-		fmt.Print(BGREEN, ">>")
+		fmt.Fprint(conn, BYELLOW, message)
+		fmt.Print(BYELLOW, ">>")
 	}
 }
 
