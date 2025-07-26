@@ -1,13 +1,36 @@
 package main
 
 import (
-  "fmt"
+	"fmt"
+)
+
+var (
+	arr = []int{9, 2, 3, 7, 6, 1, 8, 4, 0, 5}
 )
 
 func main() {
 	defer fmt.Print(NORMAL)
 	title := "    %sAlgorithms in %sGo%slang %sʕ◔ϖ◔ʔ%s\n\n"
 	fmt.Printf(title, BMAGENTA, BBLUE, BLUE, BGREEN, TEAL)
+
+	mainBubbleSort1()
+}
+
+func mainBubbleSort1() {
+	fmt.Println("mainBubbleSort1()")
+
+	counter := 0
+	fmt.Println(arr)
+	for i := range len(arr) {
+		for j := range i {
+			if arr[i] < arr[j] {
+				arr[i], arr[j] = arr[j], arr[i]
+			}
+			counter++
+			fmt.Print(NORMAL, "[", counter, "]=", arr, TEAL, "\n")
+		}
+	}
+	fmt.Println(arr)
 }
 
 const (
@@ -28,4 +51,3 @@ const (
 	BYELLOW  = "\033[1;33m"
 	BMAGENTA = "\033[1;35m"
 )
-
