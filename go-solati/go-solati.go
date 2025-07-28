@@ -39,8 +39,9 @@ func main() {
 }
 
 func mainWeb1() {
-	fmt.Println("mainWeb1()")
-
+	fmt.Print("mainWeb1()\n\n")
+	// TODO: Your code goes here:
+	fmt.Print("")
 }
 
 func mainSockets() {
