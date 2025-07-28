@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net"
+	"net/http"
 	"os"
 	"runtime"
 	"sort"
@@ -18,6 +19,7 @@ import (
 func main() {
 	defer func() {
 		//waiteForEnter()
+		fmt.Print(NORMAL)
 	}()
 	PerformTitle()
 
@@ -35,13 +37,95 @@ func main() {
 	//mainWriterReader2()
 	//mainFiles()
 	//mainSockets()
-	mainWeb1()
+	//mainWebBySockets()
+	//mainWebServerBySockets()
+	//mainWeb1()
+	mainWebServerByHandleFunc()
+}
+
+func mainWebServerByHandleFunc() {
+	address := "localhost:5050"
+	http.HandleFunc("/", someHandler)
+
+	fmt.Print("\n    \033[1;35mListen and serve: \033[1;34mhttp://", address, "\033[0m\n\n")
+	http.ListenAndServe(address, nil)
+}
+
+func someHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprint(w, "Hello, World!")
+}
+
+func mainWebServerBySockets() {
+	listner, err := net.Listen("tcp", ":8080")
+	if err != nil {
+		panic(err)
+	}
+
+	for {
+		conn, err := listner.Accept()
+		if err != nil {
+			panic(err)
+		}
+		now := time.Now()
+		body := "<html><body>"
+		body += "<h1>Time</h1>"
+		body += fmt.Sprintf("<b>Today: </b> %d:%d:%d",
+			now.Year(), now.Month(), now.Day())
+		body += "</br>"
+		body += fmt.Sprintf("<b>Time: </b>%d:%d", now.Hour(), now.Minute())
+		body += "</html></body>"
+
+		response := "HTTP/1.1 200 OK\r\n"
+		response += "Content-Type: text/html; charset=UTF-8\r\n"
+		response += "Connection: close\r\n"
+		response += fmt.Sprintf("Content-Length: %d\r\n", len(body))
+		response += "\r\n"
+		response += body
+
+		fmt.Fprint(conn, response)
+		conn.Close()
+	}
+}
+
+func mainWebBySockets() {
+	address := "localhost:5050"
+	headers, body, err := Get(address)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(headers)
+	fmt.Println(body)
+}
+
+func Get(addr string) (string, string, error) {
+	conn, err := net.Dial("tcp", addr)
+	if err != nil {
+		panic(err)
+	}
+	defer conn.Close()
+
+	rt := "GET / HTTP/1.1\r\n"
+	rt += "Host: " + addr + "\r\n"
+	rt += "Connection: close\r\n"
+	rt += "\r\n"
+
+	fmt.Fprint(conn, rt)
+	response, err := io.ReadAll(conn)
+	if err != nil {
+		return "", "", err
+	}
+
+	parts := strings.Split(string(response), "\r\n\r\n")
+	headers := parts[0]
+	body := parts[1]
+	return headers, body, nil
 }
 
 func mainWeb1() {
 	fmt.Print("mainWeb1()\n\n")
 	// TODO: Your code goes here:
-	fmt.Print("")
+	fmt.Print("The Golang Programming Language\n\n")
+
 }
 
 func mainSockets() {
