@@ -3,6 +3,8 @@ package main
 
 import (
 	"bufio"
+	"encoding/gob"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net"
@@ -40,7 +42,61 @@ func main() {
 	//mainWebBySockets()
 	//mainWebServerBySockets()
 	//mainWeb1()
-	mainWebServerByHandleFunc()
+	//mainWebServerByHandleFunc()
+	//mainJSONtest()
+	mainGob()
+}
+
+func mainGob() {
+	fileName := "/home/asohishn/Documents/Downloads/sample.gob"
+
+	file, err := os.Create(fileName)
+	if err != nil {
+		panic(err)
+	}
+	defer file.Close()
+
+	gobEncoder := gob.NewEncoder(file)
+	gobEncoder.Encode(people)
+	file.Close()
+
+	inputFile, err := os.Open(fileName)
+	if err != nil {
+		panic(err)
+	}
+	defer inputFile.Close()
+
+	gobDecoder := gob.NewDecoder(inputFile)
+	var fromFilePeople []Person
+	gobDecoder.Decode(&fromFilePeople)
+	fmt.Println(fromFilePeople)
+}
+
+type Person struct {
+	FirstName string
+	LastName  string
+	Age       uint8
+}
+
+var (
+	people = []Person{
+		{
+			FirstName: "Ardeshir",
+			LastName:  "Varmazyahr",
+			Age:       40,
+		},
+		{
+			FirstName: "Mohammad",
+			LastName:  "Aghaee",
+			Age:       32,
+		},
+	}
+)
+
+func mainJSONtest() {
+	var data strings.Builder
+	json.NewEncoder(&data).Encode(people)
+	fmt.Println(data.String())
 }
 
 func mainWebServerByHandleFunc() {
