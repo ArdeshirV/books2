@@ -44,11 +44,24 @@ func main() {
 	//mainWeb1()
 	//mainWebServerByHandleFunc()
 	//mainJSONtest()
-	mainGob()
+	//mainGob()
+	mailSendEmail()
+}
+
+func mailSendEmail() {
+	password := Input("Enter your email password: " + BGREEN)
+	fmt.Printf(TEAL+"password: %v\n", password)
+}
+
+func Input(message string) string {
+	line := ""
+	fmt.Print(message)
+	fmt.Scanln(&line)
+	return line
 }
 
 func mainGob() {
-	fileName := "/home/asohishn/Documents/Downloads/sample.gob"
+	const fileName = "/home/asohishn/Documents/Downloads/sample.gob"
 
 	file, err := os.Create(fileName)
 	if err != nil {
