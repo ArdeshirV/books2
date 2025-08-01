@@ -45,7 +45,8 @@ func main() {
 
 func mainNewWebLesson() {
 	fmt.Print("The Go Programming Language\n")
-	
+	// TODO: Your code goes here
+	fmt.Print("Hello World\n")
 }
 
 func mainWebServerByHandleFunc() {
