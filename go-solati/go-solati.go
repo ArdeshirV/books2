@@ -3,8 +3,6 @@ package main
 
 import (
 	"bufio"
-	"encoding/gob"
-	"encoding/json"
 	"fmt"
 	"io"
 	"net"
@@ -23,8 +21,7 @@ func main() {
 		//waiteForEnter()
 		fmt.Print(NORMAL)
 	}()
-	PerformTitle()
-
+	//PerformTitle()
 	//mainChapterOne()
 	//mainChapterTwo()
 	//mainChapterThree()
@@ -43,80 +40,18 @@ func main() {
 	//mainWebServerBySockets()
 	//mainWeb1()
 	//mainWebServerByHandleFunc()
-	//mainJSONtest()
-	//mainGob()
-	mailSendEmail()
+	mainNewWebLesson()
 }
 
-func mailSendEmail() {
-	password := Input("Enter your email password: " + BGREEN)
-	fmt.Printf(TEAL+"password: %v\n", password)
-}
-
-func Input(message string) string {
-	line := ""
-	fmt.Print(message)
-	fmt.Scanln(&line)
-	return line
-}
-
-func mainGob() {
-	const fileName = "/home/asohishn/Documents/Downloads/sample.gob"
-
-	file, err := os.Create(fileName)
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
-
-	gobEncoder := gob.NewEncoder(file)
-	gobEncoder.Encode(people)
-	file.Close()
-
-	inputFile, err := os.Open(fileName)
-	if err != nil {
-		panic(err)
-	}
-	defer inputFile.Close()
-
-	gobDecoder := gob.NewDecoder(inputFile)
-	var fromFilePeople []Person
-	gobDecoder.Decode(&fromFilePeople)
-	fmt.Println(fromFilePeople)
-}
-
-type Person struct {
-	FirstName string
-	LastName  string
-	Age       uint8
-}
-
-var (
-	people = []Person{
-		{
-			FirstName: "Ardeshir",
-			LastName:  "Varmazyahr",
-			Age:       40,
-		},
-		{
-			FirstName: "Mohammad",
-			LastName:  "Aghaee",
-			Age:       32,
-		},
-	}
-)
-
-func mainJSONtest() {
-	var data strings.Builder
-	json.NewEncoder(&data).Encode(people)
-	fmt.Println(data.String())
+func mainNewWebLesson() {
+	fmt.Print("The Go Programming Language\n")
+	
 }
 
 func mainWebServerByHandleFunc() {
 	address := "localhost:5050"
+	fmt.Print("\033[1;35mListen and serve: \033[1;34mhttp://", address, "\033[0m\n")
 	http.HandleFunc("/", someHandler)
-
-	fmt.Print("\n    \033[1;35mListen and serve: \033[1;34mhttp://", address, "\033[0m\n\n")
 	http.ListenAndServe(address, nil)
 }
 

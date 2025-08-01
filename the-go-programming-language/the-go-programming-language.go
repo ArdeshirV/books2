@@ -8,8 +8,9 @@ import (
 func main() {
 	defer func() {
 		//var tmp string
-		fmt.Printf("%s\nPress enter to quit.\n", NORMAL)
+		//fmt.Printf("\nPress enter to quit.\n", )
 		//fmt.Scanf("%s", &tmp)
+		fmt.Print(NORMAL)
 	}()
 	PerformTitle()
 	chapter1()
