@@ -46,7 +46,7 @@ func main() {
 func mainNewWebLesson() {
 	fmt.Print("The Go Programming Language\n")
 	// TODO: Your code goes here
-	fmt.Print("Server is working well!\n")
+	fmt.Print("Hello, World!\n")
 }
 
 func mainWebServerByHandleFunc() {
@@ -57,7 +57,7 @@ func mainWebServerByHandleFunc() {
 }
 
 func someHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "<b>Server is up and running ...</b>")
+	fmt.Fprint(w, "Hello, World!")
 }
 
 func mainWebServerBySockets() {

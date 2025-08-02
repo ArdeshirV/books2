@@ -1,4 +1,5 @@
 package main
+
 // book - The Go Programming Language
 
 import (
@@ -146,4 +147,3 @@ const (
 	BYELLOW  = "\033[1;33m"
 	BMAGENTA = "\033[1;35m"
 )
-
