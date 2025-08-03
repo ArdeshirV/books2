@@ -39,14 +39,31 @@ func main() {
 	//mainWebBySockets()
 	//mainWebServerBySockets()
 	//mainWeb1()
-	mainWebServerByHandleFunc()
-	mainNewWebLesson()
+	//mainWebServerByHandleFunc()
+	mainNewWebLessonMux()
 }
 
-func mainNewWebLesson() {
-	fmt.Print("The Go Programming Language\n")
-	// TODO: Your code goes here
-	fmt.Print("Server is working well!\n")
+func mainNewWebLessonMux() {
+	fmt.Println("The Golang Programming Language")
+
+	mux := new(mymux)
+	http.ListenAndServe("localhost:5050", mux)
+}
+
+type mymux struct{}
+
+func (m *mymux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	switch r.URL.Path {
+	case "/":
+		fmt.Fprint(w, "<b>A router</b>")
+	case "/b":
+		fmt.Fprint(w, "<b>B router</b>")
+	case "/c":
+		fmt.Fprint(w, "<b>C router</b>")
+	default:
+		w.WriteHeader(http.StatusNotFound)
+		fmt.Fprint(w, "<b>Not Found 404</b>")
+	}
 }
 
 func mainWebServerByHandleFunc() {
