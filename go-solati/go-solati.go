@@ -187,7 +187,7 @@ func mainSockets() {
 		}
 	}()
 
-	conn, err := net.Dial("tcp", "localhost:5060")
+	ronn, err := net.Dial("tcp", "localhost:5050")
 	if err != nil {
 		panic(err)
 	}
