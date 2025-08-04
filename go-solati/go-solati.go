@@ -44,10 +44,11 @@ func main() {
 }
 
 func mainNewWebLessonMux() {
-	fmt.Println("The Golang Programming Language")
+	address := "localhost:5050"
+	fmt.Print("\033[1;35mListen and serve: \033[1;34mhttp://", address, "\033[0m\n")
 
 	mux := new(mymux)
-	http.ListenAndServe("localhost:5050", mux)
+	http.ListenAndServe(address, mux)
 }
 
 type mymux struct{}
@@ -55,14 +56,14 @@ type mymux struct{}
 func (m *mymux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case "/":
-		fmt.Fprint(w, "<b>A router</b>")
+		fmt.Fprint(w, "/ router")
+	case "/a":
+		fmt.Fprint(w, "/a router")
 	case "/b":
-		fmt.Fprint(w, "<b>B router</b>")
-	case "/c":
-		fmt.Fprint(w, "<b>C router</b>")
+		fmt.Fprint(w, "/b router")
 	default:
 		w.WriteHeader(http.StatusNotFound)
-		fmt.Fprint(w, "<b>Not Found 404</b>")
+		fmt.Fprint(w, "Page not found 404")
 	}
 }
 
@@ -187,7 +188,7 @@ func mainSockets() {
 		}
 	}()
 
-	ronn, err := net.Dial("tcp", "localhost:5050")
+	conn, err := net.Dial("tcp", "localhost:5050")
 	if err != nil {
 		panic(err)
 	}
