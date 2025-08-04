@@ -13,6 +13,8 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/ArdeshirV/book/go-solati/colors"
 )
 
 // Main entry point
@@ -40,11 +42,21 @@ func main() {
 	//mainWebServerBySockets()
 	//mainWeb1()
 	//mainWebServerByHandleFunc()
+	mainNewWebAfterMux()
 	mainNewWebLessonMux()
 }
 
+func mainNewWebAfterMux() {
+	// TODO: Your new code goes here:
+	fmt.Println(colors.BoldTeal + "The Go Programming Language")
+	str := "Hello, World!"
+	strings.ToUpper(str)
+	fmt.Println(str)
+	fmt.Println(colors.Normal)
+}
+
 func mainNewWebLessonMux() {
-	address := "localhost:5050"
+	const address = "localhost:5050"
 	fmt.Print("\033[1;35mListen and serve: \033[1;34mhttp://", address, "\033[0m\n")
 
 	mux := new(mymux)
@@ -56,14 +68,14 @@ type mymux struct{}
 func (m *mymux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case "/":
-		fmt.Fprint(w, "/ router")
+		fmt.Fprint(w, "<b>/ router</b>")
 	case "/a":
-		fmt.Fprint(w, "/a router")
+		fmt.Fprint(w, "<b>/a router</b>")
 	case "/b":
-		fmt.Fprint(w, "/b router")
+		fmt.Fprint(w, "<b>/b router</b>")
 	default:
 		w.WriteHeader(http.StatusNotFound)
-		fmt.Fprint(w, "Page not found 404")
+		fmt.Fprint(w, "<b>Page not found found 404</b>")
 	}
 }
 

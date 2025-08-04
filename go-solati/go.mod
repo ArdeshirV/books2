@@ -1,6 +1,6 @@
 module github.com/ArdeshirV/book/go-solati
 
-go 1.23.5
+go 1.24.4 
 
 require (
 	github.com/cloudflare/circl v1.6.1 // indirect
