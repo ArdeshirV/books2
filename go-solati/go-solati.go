@@ -47,12 +47,9 @@ func main() {
 }
 
 func mainNewWebAfterMux() {
-	// TODO: Your new code goes here:
-	fmt.Println(colors.BoldTeal + "The Go Programming Language")
-	str := "Hello, World!"
-	strings.ToUpper(str)
-	fmt.Println(str)
+	fmt.Println(colors.BoldTeal + "This message is written in bold-teal color.")
 	fmt.Println(colors.Normal)
+
 }
 
 func mainNewWebLessonMux() {
@@ -158,7 +155,6 @@ func Get(addr string) (string, string, error) {
 
 func mainWeb1() {
 	fmt.Print("mainWeb1()\n\n")
-	// TODO: Your code goes here:
 	fmt.Print("The Golang Programming Language\n\n")
 
 }
@@ -665,7 +661,6 @@ in multilines.`)
 	str3 := fmt.Sprintf("%s, %s!", str1, str2)
 	fmt.Println(str3)
 
-	// TODO: Add your code here://
 	fmt.Printf("%v\n", str1 != str2)
 	const bit = 24
 	fmt.Println(bit >> 2)
