@@ -43,13 +43,15 @@ func main() {
 	//mainWeb1()
 	//mainWebServerByHandleFunc()
 	mainNewWebAfterMux()
-	mainNewWebLessonMux()
+	//mainNewWebLessonMux()
 }
 
 func mainNewWebAfterMux() {
 	fmt.Println(colors.BoldTeal + "This message is written in bold-teal color.")
-	fmt.Println(colors.Normal)
+	// TODO: Your new code goes here:
+	fmt.Println("The Go Programming Language")
 
+	fmt.Print(colors.Normal)
 }
 
 func mainNewWebLessonMux() {
