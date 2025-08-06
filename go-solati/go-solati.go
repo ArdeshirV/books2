@@ -49,7 +49,6 @@ func main() {
 func mainNewWebAfterMux() {
 	fmt.Println(colors.BoldTeal + "This message is written in bold-teal color.")
 	// TODO: Your new code goes here:
-	fmt.Println("The Go Programming Language")
 
 	fmt.Print(colors.Normal)
 }
