@@ -38,7 +38,7 @@ func main() {
 	//mainWriterReader2()
 	//mainFiles()
 	//mainSockets()
-	//mainWebBySockets(/home/asohishn/Documents/Pictures/Mine/Myself/Me/me_final_2024.png)
+	//mainWebBySockets()
 	//mainWebServerBySockets()
 	//mainWeb1()
 	//mainWebServerByHandleFunc()
@@ -47,12 +47,15 @@ func main() {
 }
 
 func mainNewWebAfterMux() {
+	fmt.Println(colors.BoldTeal + "This message is written in bold-teal color.")
+	// TODO: Your new code goes here:
 
+	fmt.Print(colors.Normal)
 }
 
 func mainNewWebLessonMux() {
 	const address = "localhost:5050"
-	fmt.Print("\033[1;35mListen and serve: \033[1;34mhttp://", address, colors.Normal)
+	fmt.Print("\033[1;35mListen and serve: \033[1;34mhttp://", address, "\033[0m\n")
 
 	mux := new(mymux)
 	http.ListenAndServe(address, mux)
