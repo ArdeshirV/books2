@@ -43,54 +43,11 @@ func main() {
 	//mainWeb1()
 	//mainWebServerByHandleFunc()
 	//mainNewWebAfterMux()
-	//mainNewWebLessonMux()
-	mainMiddleWareByMUX()
-}
-
-type MiddlewareFunc func(http.Handler) http.Handler
-
-func Before(handler http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
-		fmt.Println("Run before", r.URL.Path)
-		handler.ServeHTTP(w, r)
-	})
-}
-
-func After(handler http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request {
-		fmt.Println("Run after", r.URL.Path)
-		handler.ServeHTTP(w, r)
-	})
-}
-
-func mainMiddleWareByMUX() {
-	mux := http.NewServeMux()
-	mux.HandlerFunc("/hello", func(w http.ResponseWriter, r *http.Request){
-		fmt.Fprint(w, "Hello, World!")
-	})
-
-	middlewares := {Before, After}
-
-	var finalHandler http.Handler = mux
-	for _, middleware := range middlewares {
-		finalHandler = middleware(finalHandler)
-	}
-
-	http.ListenAndServe("localhost:64640", finalHandler)	
+	mainNewWebLessonMux()
 }
 
 func mainNewWebAfterMux() {
-	mux1 := http.NewServeMux()
-	mux1.HandleFunc("/hello", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, "Hello from server mux1")
-	})
 
-	mux2 := http.NewServeMux()
-	mux2.HandleFunc("hello", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprint(w, "hello from server mux 2")
-	})
-	go http.ListenAndServe("localhost:64640", mux1)
-	http.ListenAndServe("localhost:64640", mux2)
 }
 
 func mainNewWebLessonMux() {
