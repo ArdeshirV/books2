@@ -3,6 +3,8 @@ package main
 
 import (
 	"bufio"
+	"bytes"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net"
@@ -44,20 +46,58 @@ func main() {
 	//mainWebServerByHandleFunc()
 	//mainNewWebAfterMux()
 	//mainNewWebLessonMux()
-	mainMiddleWareByMUX()
+	//mainMiddleWareByMUX()
+	//mainGet()
+	//mainPost()
+}
+
+func mainPost() {
+	type User struct {
+		ID   int `json:"id"`
+		Name string
+		Age  int
+	}
+
+	buff := new(bytes.Buffer)
+	json.NewEncoder(buff).Encode(User{Name: "AmirReza", Age: 28})
+	resp, err := http.Post(
+		"http://jsonplaceholder.typicode.com/posts",
+		"application/json",
+		buff,
+	)
+	if err != nil {
+		panic(err)
+	}
+	user := new(User)
+	json.NewDecoder(resp.Body).Decode(user)
+	fmt.Println("User ID:", user.ID)
+}
+
+func mainGet() {
+	address := "https://typeo.top/assets/img/typeoHide.svg"
+	resp, err := http.Get(address)
+	if err != nil {
+		panic(err)
+	}
+	fileName := os.Getenv("HOME") + "/Documents/Downloads/typo-logo.svg"
+	dst, err := os.Create(fileName)
+	if err != nil {
+		panic(err)
+	}
+	io.Copy(dst, resp.Body)
 }
 
 type MiddlewareFunc func(http.Handler) http.Handler
 
 func Before(handler http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request){
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Run before", r.URL.Path)
 		handler.ServeHTTP(w, r)
 	})
 }
 
 func After(handler http.Handler) http.Handler {
-	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("Run after", r.URL.Path)
 		handler.ServeHTTP(w, r)
 	})
@@ -65,18 +105,19 @@ func After(handler http.Handler) http.Handler {
 
 func mainMiddleWareByMUX() {
 	mux := http.NewServeMux()
-	mux.HandlerFunc("/hello", func(w http.ResponseWriter, r *http.Request){
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("Hello, World!")
 		fmt.Fprint(w, "Hello, World!")
 	})
 
-	middlewares := {Before, After}
+	middlewares := []MiddlewareFunc{After, Before}
 
 	var finalHandler http.Handler = mux
 	for _, middleware := range middlewares {
 		finalHandler = middleware(finalHandler)
 	}
 
-	http.ListenAndServe("localhost:64640", finalHandler)	
+	http.ListenAndServe("localhost:64640", finalHandler)
 }
 
 func mainNewWebAfterMux() {
