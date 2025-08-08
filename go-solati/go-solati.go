@@ -42,8 +42,8 @@ func main() {
 	//mainWebServerBySockets()
 	//mainWeb1()
 	//mainWebServerByHandleFunc()
-	mainNewWebAfterMux()
-	//mainNewWebLessonMux()
+	//mainNewWebAfterMux()
+	mainNewWebLessonMux()
 }
 
 func mainNewWebAfterMux() {
@@ -51,7 +51,7 @@ func mainNewWebAfterMux() {
 }
 
 func mainNewWebLessonMux() {
-	const address = "localhost:5050"
+	const address = "localhost:64640"
 	fmt.Print("\033[1;35mListen and serve: \033[1;34mhttp://", address, colors.Normal)
 
 	mux := new(mymux)
@@ -75,7 +75,7 @@ func (m *mymux) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 }
 
 func mainWebServerByHandleFunc() {
-	address := "localhost:5050"
+	address := "localhost:64640"
 	fmt.Print("\033[1;35mListen and serve: \033[1;34mhttp://", address, "\033[0m\n")
 	http.HandleFunc("/", someHandler)
 	http.ListenAndServe(address, nil)
@@ -118,7 +118,7 @@ func mainWebServerBySockets() {
 }
 
 func mainWebBySockets() {
-	address := "localhost:5050"
+	address := "localhost:64640"
 	headers, body, err := Get(address)
 	if err != nil {
 		panic(err)
@@ -194,7 +194,7 @@ func mainSockets() {
 		}
 	}()
 
-	conn, err := net.Dial("tcp", "localhost:5050")
+	conn, err := net.Dial("tcp", "localhost:64640")
 	if err != nil {
 		panic(err)
 	}
