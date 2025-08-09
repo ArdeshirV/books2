@@ -49,15 +49,52 @@ func main() {
 	//mainMiddleWareByMUX()
 	//mainGet()
 	//mainPost()
+	mainNewRequest()
+}
+
+type User struct {
+	ID   int `json:"id"`
+	Name string
+	Age  int
+}
+
+func mainNewRequest() {
+	client := &http.Client{}
+	req, err := http.NewRequest("POST", "http://jsonplaceholder.typicode.com/posts", nil)
+	if err != nil {
+		panic(err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+	resp, err := client.Do(req)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+}
+
+func mainNewRequestSolati() {
+	buf := new(bytes.Buffer)
+	json.NewEncoder(buf).Encode(User{Name: "AmirReza", Age: 28})
+	req, err := http.NewRequest(
+		http.MethodPost,
+		"http://jsonplaceholder.typicode.com/posts",
+		buf,
+	)
+	if err != nil {
+		panic(err)
+	}
+	req.Header.Set("content-type", "application/json")
+	client := new(http.Client)
+	resp, err := client.Do(req)
+	if err != nil {
+		panic(err)
+	}
+	user := new(User)
+	json.NewDecoder(resp.Body).Decode(user)
+	fmt.Println("User ID:", user.ID)
 }
 
 func mainPost() {
-	type User struct {
-		ID   int `json:"id"`
-		Name string
-		Age  int
-	}
-
 	buff := new(bytes.Buffer)
 	json.NewEncoder(buff).Encode(User{Name: "AmirReza", Age: 28})
 	resp, err := http.Post(
