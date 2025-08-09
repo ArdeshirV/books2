@@ -56,6 +56,7 @@ func main() {
 func mainDatabase1() {
 	defer fmt.Print(colors.Normal)
 	// TODO: your code goes here.
+	
 	fmt.Println(colors.BoldMagenta + "The Go Programming Language")
 }
 
@@ -989,3 +990,4 @@ const (
 // P55: true || false ==> false
 // P54: a < b, a < b
 // P79: تعریف تابغ به خط فارسی برعکس شده است
+
