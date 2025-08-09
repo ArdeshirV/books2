@@ -49,22 +49,30 @@ func main() {
 	//mainMiddleWareByMUX()
 	//mainGet()
 	//mainPost()
-	mainNewRequest()
+	//mainNewRequestSolati()
+	mainDatabase1()
+}
+
+func mainDatabase1() {
+	// TODO: your code goes here.
 }
 
 type User struct {
-	ID   int `json:"id"`
-	Name string
-	Age  int
+	ID      int `json:"id"`
+	Name    string
+	Age     int
+	Address string
 }
 
 func mainNewRequest() {
-	client := &http.Client{}
-	req, err := http.NewRequest("POST", "http://jsonplaceholder.typicode.com/posts", nil)
+	buf := new(bytes.Buffer)
+	json.NewEncoder(buf).Encode(User{Name: "AmirReza", Age: 28})
+	req, err := http.NewRequest("POST", "http://jsonplaceholder.typicode.com/posts", buf)
 	if err != nil {
 		panic(err)
 	}
 	req.Header.Set("Content-Type", "application/json")
+	client := &http.Client{}
 	resp, err := client.Do(req)
 	if err != nil {
 		panic(err)
@@ -89,6 +97,7 @@ func mainNewRequestSolati() {
 	if err != nil {
 		panic(err)
 	}
+	defer resp.Body.Close()
 	user := new(User)
 	json.NewDecoder(resp.Body).Decode(user)
 	fmt.Println("User ID:", user.ID)
