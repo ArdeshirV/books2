@@ -4,8 +4,12 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"database/sql"
 	"encoding/json"
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 	"io"
 	"net"
 	"net/http"
@@ -50,13 +54,72 @@ func main() {
 	//mainGet()
 	//mainPost()
 	//mainNewRequestSolati()
-	mainDatabase1()
+	mainMySQLtest()
 }
 
-func mainDatabase1() {
-	defer fmt.Print(colors.Normal)
-	// TODO: your code goes here.
-	fmt.Println(colors.BoldMagenta + "The Go Programming Language :)")
+type Connection interface {
+	GetConnection() string
+}
+
+type DataConnection struct {
+	username string
+	password string
+	database string
+	host     string
+	port     string
+}
+
+func NewConnection(username, password, host, port, database string) *DataConnection {
+	var c DataConnection
+	c.username = username
+	c.password = password
+	c.host = host
+	c.port = port
+	c.database = database
+	return &c
+}
+
+func (c DataConnection) GetMySqlConnection() string {
+	return fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
+		c.username,
+		c.password,
+		c.host,
+		c.port,
+		c.database,
+	)
+}
+
+func (c DataConnection) GetMariaDBConnection() string {
+	return c.GetMySqlConnection()
+}
+
+var mariaDBConnection Connection
+
+func mainMySQLtest() {
+	godotenv.Load()
+	connection := NewConnection(
+		os.Getenv("MARIADB_USERNAME"),
+		os.Getenv("MARIADB_PASSWORD"),
+		os.Getenv("MARIADB_HOST"),
+		os.Getenv("MARIADB_PORT"),
+		os.Getenv("MARIADB_DATABASE"),
+	)
+	db, err := sql.Open("mysql", connection.GetMariaDBConnection())
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
+
+	if err = db.Ping(); err != nil {
+		panic(err)
+	}
+	fmt.Println("Connected to database successfully")
+
+	rows, err := db.Query("select * from mydb.persons")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("mydb.persons's rows:", rows)
 }
 
 type User struct {
