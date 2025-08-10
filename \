@@ -56,7 +56,12 @@ func main() {
 func mainDatabase1() {
 	defer fmt.Print(colors.Normal)
 	// TODO: your code goes here.
+	fmt.Println("Hi")
 	fmt.Println(colors.BoldMagenta + "The Go Programming Language :)")
+}
+
+func BinarySearch() {
+	fmt.Print()
 }
 
 type User struct {
