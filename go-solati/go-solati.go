@@ -57,10 +57,6 @@ func main() {
 	mainMySQLtest()
 }
 
-type Connection interface {
-	GetConnection() string
-}
-
 type DataConnection struct {
 	username string
 	password string
@@ -79,6 +75,16 @@ func NewConnection(username, password, host, port, database string) *DataConnect
 	return &c
 }
 
+func (c DataConnection) GetPostgresqlConnection() string {
+	return fmt.Sprintf("%s%s%s%s%s",
+		c.username,
+		c.password,
+		c.host,
+		c.port,
+		c.database,
+	)
+}
+
 func (c DataConnection) GetMySqlConnection() string {
 	return fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
 		c.username,
@@ -89,11 +95,9 @@ func (c DataConnection) GetMySqlConnection() string {
 	)
 }
 
-func (c DataConnection) GetMariaDBConnection() string {
+func (c DataConnection) GetMariadbConnection() string {
 	return c.GetMySqlConnection()
 }
-
-var mariaDBConnection Connection
 
 func mainMySQLtest() {
 	godotenv.Load()
@@ -104,7 +108,7 @@ func mainMySQLtest() {
 		os.Getenv("MARIADB_PORT"),
 		os.Getenv("MARIADB_DATABASE"),
 	)
-	db, err := sql.Open("mysql", connection.GetMariaDBConnection())
+	db, err := sql.Open("mysql", connection.GetMariadbConnection())
 	if err != nil {
 		panic(err)
 	}
