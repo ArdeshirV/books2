@@ -117,13 +117,8 @@ func mainMySQLtest() {
 	if err = db.Ping(); err != nil {
 		panic(err)
 	}
-	fmt.Println("Connected to database successfully")
-
-	rows, err := db.Query("select * from mydb.persons")
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println("mydb.persons's rows:", rows)
+	fmt.Printf("%sConnected to database successfully%s\n",
+		colors.BoldMagenta, colors.Normal)
 }
 
 type User struct {
