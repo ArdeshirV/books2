@@ -93,6 +93,22 @@ func mainPrepare() {
 	fmt.Printf("%sname: %s%s%s, %semail: %s%s%s\n",
 		colors.Bold, colors.BoldMagenta, name, colors.Normal,
 		colors.Bold, colors.BoldMagenta, email, colors.Normal)
+
+	result, err = db.Exec("UPDATE users SET email = 'myemail@gmailx.com' WHERE id = 1")
+	if err != nil {
+		panic(err)
+	}
+
+	row = db.QueryRow("SELECT name, email FROM users WHERE id = ?", 1)
+	err = row.Scan(&name, &email)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("After modifications:")
+	fmt.Printf("%sname: %s%s%s, %semail: %s%s%s\n",
+		colors.Bold, colors.BoldMagenta, name, colors.Normal,
+		colors.Bold, colors.BoldMagenta, email, colors.Normal)
 }
 
 const mysqlQuery = `
