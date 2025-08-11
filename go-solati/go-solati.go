@@ -54,7 +54,72 @@ func main() {
 	//mainGet()
 	//mainPost()
 	//mainNewRequestSolati()
-	mainMySQLtest()
+	//mainMySQLtest()
+	//mainCreateTableByQuery()
+	mainPrepare()
+}
+
+func mainPrepare() {
+	db, err := sql.Open("mysql", GetConnectionStringToMariadb())
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
+
+	if err = db.Ping(); err != nil {
+		panic(err)
+	}
+	fmt.Printf("%sConnecttion database successfully.%s\n", colors.BoldYellow, colors.Normal)
+
+	stm, err := db.Prepare("INSERT INTO users(name, email) VALUES(?, ?) ")
+	if err != nil {
+		panic(err)
+	}
+
+	result, err := stm.Exec("Ardeshir", "ardeshir@somewhere.com")
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Println("result: ", result)
+
+	row := db.QueryRow("SELECT name, email FROM users WHERE id = ?", 1)
+	var name, email string
+	err = row.Scan(&name, &email)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("%sname: %s%s%s, %semail: %s%s%s\n",
+		colors.Bold, colors.BoldMagenta, name, colors.Normal,
+		colors.Bold, colors.BoldMagenta, email, colors.Normal)
+}
+
+const mysqlQuery = `
+CREATE TABLE users(
+	id INT(11) NOT NULL AUTO_INCREMENT,
+	name VARCHAR(128) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
+	email VARCHAR(64) CHARACTER set utf8 COLLATE utf8_general_ci DEFAULT NULL,
+	PRIMARY KEY (id)
+) ENGINE=InnoDB`
+
+func mainCreateTableByQuery() {
+	db, err := sql.Open("mysql", GetConnectionStringToMariadb())
+	if err != nil {
+		panic(err)
+	}
+	defer db.Close()
+
+	if err = db.Ping(); err != nil {
+		panic(err)
+	}
+	fmt.Println("Connect to mariadb successfully")
+
+	if _, err = db.Exec(mysqlQuery); err != nil {
+		panic(err)
+	}
+	fmt.Printf("%sThe table has beend created successfully.%s\n",
+		colors.BoldGreen, colors.Normal)
 }
 
 type DataConnection struct {
@@ -99,16 +164,19 @@ func (c DataConnection) GetMariadbConnection() string {
 	return c.GetMySqlConnection()
 }
 
-func mainMySQLtest() {
+func GetConnectionStringToMariadb() string {
 	godotenv.Load()
-	connection := NewConnection(
+	return NewConnection(
 		os.Getenv("MARIADB_USERNAME"),
 		os.Getenv("MARIADB_PASSWORD"),
 		os.Getenv("MARIADB_HOST"),
 		os.Getenv("MARIADB_PORT"),
 		os.Getenv("MARIADB_DATABASE"),
-	)
-	db, err := sql.Open("mysql", connection.GetMariadbConnection())
+	).GetMariadbConnection()
+}
+
+func mainMySQLtest() {
+	db, err := sql.Open("mysql", GetConnectionStringToMariadb())
 	if err != nil {
 		panic(err)
 	}
