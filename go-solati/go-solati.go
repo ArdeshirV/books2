@@ -4,6 +4,9 @@ package main
 import (
 	"bufio"
 	"bytes"
+	//"go.mongodb.org/mongo-driver/bson"
+	//"go.mongodb.org/mongo-driver/mongo"
+	//"go.mongodb.org/mongo-driver/mongo/options"
 	"database/sql"
 	"encoding/json"
 	"fmt"
@@ -57,7 +60,107 @@ func main() {
 	//mainMySQLtest()
 	//mainCreateTableByQuery()
 	mainPrepare()
+	//mainMongodb()
+	mainReflection()
 }
+
+func mainReflection() {
+	fmt.Printf("%sReflection is here%s\n", colors.BoldMagenta, colors.Normal)
+}
+
+/*
+// The glorious mongodb project!
+
+var context Context
+
+func init() {
+	context := Context.GetBackgroundContext()
+}
+
+type Person struct {
+	Name string
+	Age int
+	Email string
+}
+
+func createPerson(client *mongo.Client, person Person) error {
+	collection := client.Database("testdb").Collection("people")
+	_, err := collection.InsertOne(context.Background(), person)
+	return err
+}
+
+func getPersonName(client *mongo.Client, name string) (*Person, error) {
+	var person Person
+	collection := client.Database("testdb").Collection("people")
+	filter := bson.M{"name": name}
+	if err := collection.FindOne(context.Background(), filter).Decode(&person); err != nil {
+		return nil, err
+	}
+	return &person, nil
+}
+
+func updatePersonAge(client *mongo.Client, name string, age int) error {
+	collection := client.Database("testdb").Collection("people")
+	filter := bson.M{"name": name}
+	update := bson.M{"$set": bson.M{"age": age}}
+	_, err := collection.UpdateOne(context.Background(), filter, update)
+	return err
+}
+
+func connectDB() {
+	clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
+	client, err := mongo.Connect(context.Background(), clientOptions)
+	if err != nil {
+		panic(err)
+	}
+
+	if err = client.Ping(context.Background(), nil); err != nil {
+		return nil, err
+	}
+
+	fmt.Println("Connected to MongoDB")
+	return client, nil
+}
+
+func deletePerson(client *mongodb.Client, name string) error {
+	collection := client.Database("testdb").Collection("people")
+	filter := bson.M{"name": name}
+	_, err := collection.DeleteOne(context.Background(), filter)
+	return err
+}
+
+func mainMongodb() {
+	client, err := connectDB()
+	if err != nil {
+		log.Fatal("Error connection to Mongodb:", err)
+	}
+	defer client.Disconnect(context.Background())
+
+	person := Person{
+		Name: "John Doe",
+		Age: 40,
+		Email: "someone@somewhere.com",
+	}
+
+	err := createPerson(client, person)
+	if err != nil {
+		log.Fatal("Error creating person:", err)
+	}
+
+	foundPerson, err := getPersonByName(client, "John Doe")
+	if err != nil {
+		log.Fatal("Error reading person:", err)
+	}
+	fmt.Println("Found person:", foundPerson)
+
+	if err = updatePersonAge(client, "John Doe", 40000); err != nil {
+		log.Fatal("Error updating person:", err)
+	}
+
+	if err = deletePerson(client, "John Doe"); err != nil {
+		log.Fatal("Error deleting person:", err)
+	}
+}*/
 
 func mainPrepare() {
 	db, err := sql.Open("mysql", GetConnectionStringToMariadb())
@@ -69,7 +172,7 @@ func mainPrepare() {
 	if err = db.Ping(); err != nil {
 		panic(err)
 	}
-	fmt.Printf("%sConnecttion database successfully.%s\n", colors.BoldYellow, colors.Normal)
+	fmt.Printf("%sConnected to database successfully.%s\n", colors.BoldYellow, colors.Normal)
 
 	stm, err := db.Prepare("INSERT INTO users(name, email) VALUES(?, ?) ")
 	if err != nil {
@@ -119,7 +222,7 @@ CREATE TABLE users(
 	PRIMARY KEY (id)
 ) ENGINE=InnoDB`
 
-func mainCreateTableByQuery() {
+func mainCreateTableQuery() {
 	db, err := sql.Open("mysql", GetConnectionStringToMariadb())
 	if err != nil {
 		panic(err)
@@ -129,7 +232,7 @@ func mainCreateTableByQuery() {
 	if err = db.Ping(); err != nil {
 		panic(err)
 	}
-	fmt.Println("Connect to mariadb successfully")
+	fmt.Println("Connected to mariadb successfully")
 
 	if _, err = db.Exec(mysqlQuery); err != nil {
 		panic(err)
