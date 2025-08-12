@@ -59,7 +59,7 @@ func main() {
 	//mainNewRequestSolati()
 	//mainMySQLtest()
 	//mainCreateTableByQuery()
-	mainPrepare()
+	//mainPrepare()
 	//mainMongodb()
 	mainReflection()
 }
