@@ -286,11 +286,11 @@ func (c DataConnection) GetMariadbConnection() string {
 func GetConnectionStringToMariadb() string {
 	godotenv.Load()
 	return NewConnection(
-		os.Getenv("MARIADB_USERNAME"),
-		os.Getenv("MARIADB_PASSWORD"),
-		os.Getenv("MARIADB_HOST"),
-		os.Getenv("MARIADB_PORT"),
-		os.Getenv("MARIADB_DATABASE"),
+		os.Getenv("USERNAME"),
+		os.Getenv("PASSWORD"),
+		os.Getenv("HOST"),
+		os.Getenv("PORT"),
+		os.Getenv("DATABASE"),
 	).GetMariadbConnection()
 }
 
