@@ -83,6 +83,9 @@ func mainReflection() {
 	z := &y
 	u := &z
 	fmt.Printf("%v, %v, %v, %v\n", x, y, z, u)
+	fmt.Printf("")
+
+	fmt.Println("This is the golang programming language")
 }
 
 func sum(numbers []int) int {
