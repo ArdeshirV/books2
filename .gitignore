@@ -26,6 +26,8 @@ go.work.sum
 
 # env file
 .env
+*.*.env
+*.env
 
 *~
 build
@@ -34,4 +36,3 @@ introducing-go/ir.ArdeshirV.Introducing-Go
 effective-go/effective-go
 the-go-programming-language/the-go-programming-language
 introducing-go/introducing-go
-
