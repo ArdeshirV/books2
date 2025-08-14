@@ -9,7 +9,6 @@ import (
 	"hash/crc32"
 	"io"
 	"io/fs"
-	"io/ioutil"
 	"math"
 	"math/rand"
 	"net"
@@ -100,7 +99,7 @@ func stepFive() {
 			}
 			defer res.Body.Close()
 
-			bs, err := ioutil.ReadAll(res.Body)
+			bs, err := io.ReadAll(res.Body)
 			if err != nil {
 				panic(err)
 			}
@@ -365,13 +364,13 @@ func Chapter8Packages() {
 		panic(err)
 	}
 
-	fmt.Println(
+	fmt.Print(
 		"stat.IsDir()", stat.IsDir(), "\n",
 		"stat.Mode()", stat.Mode(), "\n",
 		"stat.ModTime()", stat.ModTime(), "\n",
 		"stat.Name()", stat.Name(), "\n",
 		"stat.Size()", stat.Size(), "\n",
-		"stat.Sys()", stat.Sys(), "\n")
+		"stat.Sys()", stat.Sys(), "\n\n")
 
 	buff := make([]byte, stat.Size())
 	_, err = file.Read(buff)
@@ -1230,4 +1229,3 @@ func ChapterOne() {
 	os.Exit(0)
 	fmt.Println("You won't see this line never")
 }
-

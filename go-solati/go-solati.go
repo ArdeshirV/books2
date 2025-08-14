@@ -4,6 +4,7 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"reflect"
 	//"go.mongodb.org/mongo-driver/bson"
 	//"go.mongodb.org/mongo-driver/mongo"
 	//"go.mongodb.org/mongo-driver/mongo/options"
@@ -66,6 +67,30 @@ func main() {
 
 func mainReflection() {
 	fmt.Printf("%sReflection is here%s\n", colors.BoldMagenta, colors.Normal)
+	data := User{Name: "Ardeshir", Address: "something@somewhere.com"}
+	v := reflect.ValueOf(data)
+	t := reflect.TypeOf(data)
+	fmt.Println("Value:", v, "\nType:", t, "\nKind:", t.Kind())
+
+	numbers := []int{1, 2, 3}
+	v = reflect.ValueOf(numbers)
+	numbers2 := v.Interface().([]int)
+	s := sum(numbers2)
+	fmt.Println(s)
+
+	x := 90
+	y := &x
+	z := &y
+	u := &z
+	fmt.Printf("%v, %v, %v, %v\n", x, y, z, u)
+}
+
+func sum(numbers []int) int {
+	var sum int
+	for _, n := range numbers {
+		sum += n
+	}
+	return sum
 }
 
 /*
