@@ -65,6 +65,30 @@ func main() {
 	mainReflection()
 }
 
+func ReadStruct(s any) (string, error) {
+	v := reflect.ValueOf(s)
+	t := reflect.TypeOf(s)
+
+	for t.Kind() == reflect.Ptr {
+		t = t.Elem()
+		v = v.Elem()
+	}
+
+	if t.Kind() != reflect.Struct {
+		return "", fmt.Errorf("error: the input value of ReadStruct is not a struct instance")
+	}
+
+	var sb strings.Builder
+	sb.WriteString("Fields:")
+	for i := range t.NumField() {
+		field := t.Field(i)
+		value := v.Field(i)
+		sb.WriteString(fmt.Sprintf("%s (%s) = %v\n", field.Name, field.Type, value.Interface()))
+	}
+
+	return sb.String(), nil
+}
+
 func mainReflection() {
 	fmt.Printf("%sReflection is here%s\n", colors.BoldMagenta, colors.Normal)
 	data := User{Name: "Ardeshir", Address: "something@somewhere.com"}
@@ -83,9 +107,11 @@ func mainReflection() {
 	z := &y
 	u := &z
 	fmt.Printf("%v, %v, %v, %v\n", x, y, z, u)
-	fmt.Printf("")
 
-	fmt.Println("This is the golang programming language")
+	fmt.Println()
+	if output, err := ReadStruct(&data); err == nil {
+		fmt.Println(output)
+	}
 }
 
 func sum(numbers []int) int {
