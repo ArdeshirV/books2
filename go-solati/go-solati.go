@@ -62,7 +62,22 @@ func main() {
 	//mainCreateTableByQuery()
 	//mainPrepare()
 	//mainMongodb()
-	mainReflection()
+	//mainReflection()
+	mainReadStruct()
+}
+
+type SomeUser struct {
+	user User
+	age  int
+}
+
+func mainReadStruct() {
+	data := SomeUser{user: User{Name: "Ardeshir", Address: "something@somewhere.com"}, age: 19}
+	res, err := ReadStruct(data)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(res)
 }
 
 func ReadStruct(s any) (string, error) {
@@ -83,7 +98,18 @@ func ReadStruct(s any) (string, error) {
 	for i := range t.NumField() {
 		field := t.Field(i)
 		value := v.Field(i)
+<<<<<<< HEAD
 		sb.WriteString(fmt.Sprintf("%s (%s) = %v\n", field.Name, field.Type, value))
+=======
+		vv := value.Interface().(field.Type)
+		sb.WriteString(fmt.Sprintf("%s (%s) = %v\n", field.Name, field.Type, vv))
+		//if reflect.TypeOf(vv).Kind() == reflect.Struct {
+		//	res, err := ReadStruct(value)
+		//			if err != nil {
+		//				sb.WriteString(res)
+		//			}
+		//		}
+>>>>>>> e1b3011 (Update)
 	}
 	return sb.String(), nil
 }
