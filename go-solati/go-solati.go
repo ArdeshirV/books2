@@ -83,9 +83,8 @@ func ReadStruct(s any) (string, error) {
 	for i := range t.NumField() {
 		field := t.Field(i)
 		value := v.Field(i)
-		sb.WriteString(fmt.Sprintf("%s (%s) = %v\n", field.Name, field.Type, value.Interface()))
+		sb.WriteString(fmt.Sprintf("%s (%s) = %v\n", field.Name, field.Type, value))
 	}
-
 	return sb.String(), nil
 }
 
