@@ -60,10 +60,16 @@ func main() {
 	//mainNewRequestSolati()
 	//mainMySQLtest()
 	//mainCreateTableByQuery()
-	mainPrepare()
+	//mainPrepare()
 	//mainMongodb()
 	//mainReflection()
-	mainReadStruct()
+	//mainReadStruct()
+	mainReflectionNew()
+}
+
+func mainReflectionNew() {
+	fmt.Println(colors.BoldYellow + "Reflection New" + colors.Normal)
+	// TODO: New code goes here:
 }
 
 type SomeUser struct {
