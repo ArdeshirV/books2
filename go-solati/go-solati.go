@@ -60,7 +60,7 @@ func main() {
 	//mainNewRequestSolati()
 	//mainMySQLtest()
 	//mainCreateTableByQuery()
-	//mainPrepare()
+	mainPrepare()
 	//mainMongodb()
 	//mainReflection()
 	mainReadStruct()
@@ -359,13 +359,15 @@ func (c DataConnection) GetMariadbConnection() string {
 }
 
 func GetConnectionStringToMariadb() string {
-	godotenv.Load()
+	const prefix = "LOCAL_MARIADB_"
+	dotenv := os.Getenv("DOTENV")
+	godotenv.Load(dotenv)
 	return NewConnection(
-		os.Getenv("USERNAME"),
-		os.Getenv("PASSWORD"),
-		os.Getenv("HOST"),
-		os.Getenv("PORT"),
-		os.Getenv("DATABASE"),
+		os.Getenv(prefix+"USERNAME"),
+		os.Getenv(prefix+"PASSWORD"),
+		os.Getenv(prefix+"HOST"),
+		os.Getenv(prefix+"PORT"),
+		os.Getenv(prefix+"DATABASE_TEST"),
 	).GetMariadbConnection()
 }
 
