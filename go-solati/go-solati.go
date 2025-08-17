@@ -77,7 +77,7 @@ func mainReadStruct() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(res)
+	fmt.Println("Result:", res)
 }
 
 func ReadStruct(s any) (string, error) {
