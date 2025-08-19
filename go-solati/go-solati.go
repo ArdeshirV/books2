@@ -68,7 +68,7 @@ func main() {
 }
 
 func mainReflectionNew() {
-	fmt.Println(colors.BoldYellow + "Reflection New" + colors.Normal)
+	fmt.Printf("%sReflection New%s\n", colors.BoldYellow, colors.Normal)
 	// TODO: New code goes here:
 }
 
