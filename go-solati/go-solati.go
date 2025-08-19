@@ -67,9 +67,22 @@ func main() {
 	mainReflectionNew()
 }
 
+func testAdd(a, b int) int {
+	return a + b
+}
+
 func mainReflectionNew() {
 	fmt.Printf("%sReflection New%s\n", colors.BoldYellow, colors.Normal)
 	// TODO: New code goes here:
+	someVar := 239.00434
+	v := reflect.ValueOf(&someVar).Elem()
+	t := reflect.TypeOf(someVar)
+
+	if v.CanSet() {
+		v.SetFloat(1000.0001)
+	}
+	fmt.Print("Value:", v, ", Type:", t, ", Kind:", t.Kind(), "\n")
+
 }
 
 type SomeUser struct {
@@ -862,7 +875,7 @@ func mainChannels3() {
 
 	fmt.Println("Number of CPUs:", runtime.NumCPU())
 	fmt.Println("Durations:", time.Since(now))
-	fmt.Printf("%#T\n", time.Second)
+	fmt.Printf("%T\n", time.Second)
 }
 
 func mainChannels2() {
@@ -886,9 +899,9 @@ func mainChannels2() {
 			break
 		}
 	}
-	fmt.Printf("\n%#T, len(c) = %v\n", c, len(c))
+	fmt.Printf("\n%T, len(c) = %v\n", c, len(c))
 	c <- 10
-	fmt.Printf("\n%#T, len(c) = %v\n", c, len(c))
+	fmt.Printf("\n%T, len(c) = %v\n", c, len(c))
 	fmt.Println()
 	close(c)
 }
