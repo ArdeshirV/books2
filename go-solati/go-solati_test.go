@@ -11,8 +11,3 @@ func TestTestAdd(t *testing.T) {
 		t.Errorf("Expected testAdd(%d, %d) = %d, but got %d", a, b, exp, res)
 	}
 }
-
-
-
-
-

@@ -82,7 +82,6 @@ func mainReflectionNew() {
 		v.SetFloat(1000.0001)
 	}
 	fmt.Print("Value:", v, ", Type:", t, ", Kind:", t.Kind(), "\n")
-
 }
 
 type SomeUser struct {
