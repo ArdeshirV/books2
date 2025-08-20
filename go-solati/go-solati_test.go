@@ -13,8 +13,8 @@ func TestTestAdd(t *testing.T) {
 }
 
 func BenchmarkTestAdd(b testing.B) {
-  x, y := 10, 20
-  for range b.N {
-    testAdd(x, y)
-  }
+	x, y := 10, 20
+	for range b.N {
+		testAdd(x, y)
+	}
 }
