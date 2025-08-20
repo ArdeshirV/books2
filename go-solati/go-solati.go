@@ -5,6 +5,7 @@ import (
 	"bufio"
 	"bytes"
 	"reflect"
+	"runtime/pprof"
 	//"go.mongodb.org/mongo-driver/bson"
 	//"go.mongodb.org/mongo-driver/mongo"
 	//"go.mongodb.org/mongo-driver/mongo/options"
@@ -67,11 +68,19 @@ func main() {
 	mainReflectionNew()
 }
 
+// TODO: Add your codes here
+
 func testAdd(a, b int) int {
 	return a + b
 }
 
 func mainReflectionNew() {
+	fileProfile, err := os.Create("CPU.profile")
+	if err != nil {
+		panic(err)
+	}
+	pprof.StartCPUProfile(fileProfile)
+	defer pprof.StopCPUProfile()
 	fmt.Printf("%sReflection New%s\n", colors.BoldYellow, colors.Normal)
 	// TODO: New code goes here:
 	someVar := 239.00434
