@@ -11,3 +11,10 @@ func TestTestAdd(t *testing.T) {
 		t.Errorf("Expected testAdd(%d, %d) = %d, but got %d", a, b, exp, res)
 	}
 }
+
+func BenchmarkTestAdd(b testing.B) {
+  x, y := 10, 20
+  for range b.N {
+    testAdd(x, y)
+  }
+}
