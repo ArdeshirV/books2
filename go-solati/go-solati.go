@@ -82,7 +82,6 @@ func mainReflectionNew() {
 	pprof.StartCPUProfile(fileProfile)
 	defer pprof.StopCPUProfile()
 	fmt.Printf("%sReflection New%s\n", colors.BoldYellow, colors.Normal)
-	// TODO: New code goes here:
 	someVar := 239.00434
 	v := reflect.ValueOf(&someVar).Elem()
 	t := reflect.TypeOf(someVar)
@@ -1342,3 +1341,5 @@ const (
 // P55: true || false ==> false
 // P54: a < b, a < b
 // P79: تعریف تابغ به خط فارسی برعکس شده است
+// P488: در پاراگراف آخر فانکسن Max به فانکشن ئSum  باید تغییر داده شود«
+// P492: آخرید خط : Float تمام اعداد صحیح  - که باید شود بتمام اعداد اعشار
