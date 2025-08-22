@@ -77,8 +77,6 @@ func mainReflectionNew() {
 	v := reflect.ValueOf(&someVar).Elem()
 	t := reflect.TypeOf(someVar)
 
-	fmt.Print("Hello, World!")
-
 	if v.CanSet() {
 		v.SetFloat(1000.0001)
 	}
