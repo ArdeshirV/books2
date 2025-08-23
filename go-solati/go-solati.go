@@ -97,6 +97,7 @@ func mainReadStruct() {
 	fmt.Println("Result:", res)
 }
 
+
 func ReadStruct(s any) (string, error) {
 	v := reflect.ValueOf(s)
 	t := reflect.TypeOf(s)
