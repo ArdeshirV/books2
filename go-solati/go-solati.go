@@ -50,7 +50,7 @@ func main() {
 	//mainSockets()
 	//mainWebBySockets(/home/asohishn/Documents/Pictures/Mine/Myself/Me/me_final_2024.png)
 	//mainWebServerBySockets()
-	//mainWeb1()
+	//ainWeb1()
 	//mainWebServerByHandleFunc()
 	//mainNewWebAfterMux()
 	//mainNewWebLessonMux()
