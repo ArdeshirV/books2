@@ -82,7 +82,7 @@ func mainStandardLib() {
 }
 
 func mainToUpper() {
-	someString := "This is a string"
+	someString := "This is a string XyZ ایران"
 	fmt.Println(ToUpper(someString))
 	fmt.Println(ToLower(ToUpper(someString)))
 }
