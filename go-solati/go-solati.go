@@ -82,7 +82,7 @@ func mainContext() {
 	ctx, cancel := context.WithCancel(background)
 	go func() {
 		//scanner := bufio.NewScanner(os.Stdin)
-		fmt.Println("Press enter to finish. ")
+		fmt.Println("Press <Enter> to finish. ")
 		var ch rune
 		_, err := fmt.Scanf("%c", &ch)
 		if err != nil {
