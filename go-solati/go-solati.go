@@ -75,6 +75,9 @@ func mainStandardLib() {
 	s := []string{"Hello", "Hi", "Ardeshir", "Iran", "Azadi"}
 	index := slices.Index(s, word)
 	fmt.Printf("Index of %s is %v\n", word, index)
+
+  m := min(10, 20, 30, 1, 33)
+  fmt.Println(m)
 }
 
 func testAdd(a, b int) int {
