@@ -82,13 +82,15 @@ func mainContext() {
 	ctx, cancel := context.WithCancel(background)
 	go func() {
 		//scanner := bufio.NewScanner(os.Stdin)
-		fmt.Println("Enter exit to finish <x> ")
+		fmt.Println("Press enter to finish. ")
 		var ch rune
-		fmt.Scanf("%c", &ch)
-		if ch == 'x' {
-			cancel()
+		_, err := fmt.Scanf("%c", &ch)
+		if err != nil {
+			panic(err)
 		}
+		cancel()
 	}()
+	time.Sleep(time.Millisecond * 300)
 	heavyTask(ctx)
 }
 
@@ -97,13 +99,13 @@ func heavyTask(ctx context.Context) {
 	for {
 		select {
 		case <-ctx.Done():
-			fmt.Println("Task canceled", ctx.Err())
+			fmt.Println("Task canceled because", ctx.Err())
 			return
 		case <-time.After(time.Second * 100000):
 			fmt.Println("Task finished")
 			return
 		default:
-			fmt.Print("\b\b\b\b    \r", strings.Repeat(".", i))
+			fmt.Print("\rWorking on heavy task    \b\b\b\b", strings.Repeat(".", i))
 			time.Sleep(time.Millisecond * 500)
 			i++
 			if i >= 4 {
