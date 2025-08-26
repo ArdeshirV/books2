@@ -5,6 +5,7 @@ import (
 	"bufio"
 	"bytes"
 	"reflect"
+	"slices"
 	//"go.mongodb.org/mongo-driver/bson"
 	//"go.mongodb.org/mongo-driver/mongo"
 	//"go.mongodb.org/mongo-driver/mongo/options"
@@ -69,8 +70,11 @@ func main() {
 }
 
 func mainStandardLib() {
-	fmt.Println("Standard Library")
 	// TODO: Add your codes here:
+	word := "Iran"
+	s := []string{"Hello", "Hi", "Ardeshir", "Iran", "Azadi"}
+	index := slices.Index(s, word)
+	fmt.Printf("Index of %s is %d", word, index)
 }
 
 func testAdd(a, b int) int {
