@@ -74,7 +74,7 @@ func mainStandardLib() {
 	word := "Iran"
 	s := []string{"Hello", "Hi", "Ardeshir", "Iran", "Azadi"}
 	index := slices.Index(s, word)
-	fmt.Printf("Index of %s is %d", word, index)
+	fmt.Printf("Index of %s is %v\n", word, index)
 }
 
 func testAdd(a, b int) int {
