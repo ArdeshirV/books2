@@ -6,15 +6,14 @@ import (
 	"bytes"
 	"reflect"
 	"slices"
+	//"strconv"
+
 	//"go.mongodb.org/mongo-driver/bson"
 	//"go.mongodb.org/mongo-driver/mongo"
 	//"go.mongodb.org/mongo-driver/mongo/options"
 	"database/sql"
 	"encoding/json"
 	"fmt"
-	_ "github.com/go-sql-driver/mysql"
-	"github.com/joho/godotenv"
-	_ "github.com/lib/pq"
 	"io"
 	"net"
 	"net/http"
@@ -24,6 +23,10 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/joho/godotenv"
+	_ "github.com/lib/pq"
 
 	"github.com/ArdeshirV/book/go-solati/colors"
 )
@@ -66,7 +69,8 @@ func main() {
 	//mainReflection()
 	//mainReadStruct()
 	//mainReflectionNew()
-	mainStandardLib()
+	//mainStandardLib()
+	mainToUpper()
 }
 
 func mainStandardLib() {
@@ -75,14 +79,38 @@ func mainStandardLib() {
 	s := []string{"Hello", "Hi", "Ardeshir", "Iran", "Azadi"}
 	index := slices.Index(s, word)
 	fmt.Printf("Index of %s is %v\n", word, index)
+}
 
-	newS := slices.Clone(s)
-	fmt.Println(newS)
+func mainToUpper() {
+	someString := "This is a string"
+	fmt.Println(ToUpper(someString))
+	fmt.Println(ToLower(ToUpper(someString)))
+}
 
-	fmt.Print("Enter your name: ")
-	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Scan()
-	fmt.Println("Hello", scanner.Text())
+func ToUpper(s string) string {
+	var sb strings.Builder
+	const dist = 'a' - 'A'
+	for _, ch := range s {
+		if ch >= 'a' && ch <= 'z' {
+			sb.WriteRune(ch - dist)
+		} else {
+			sb.WriteRune(ch)
+		}
+	}
+	return sb.String()
+}
+
+func ToLower(s string) string {
+	const dist = 'a' - 'A'
+	var sb strings.Builder
+	for _, ch := range s {
+		if ch >= 'A' && ch <= 'Z' {
+			sb.WriteRune(ch + dist)
+		} else {
+			sb.WriteRune(ch)
+		}
+	}
+	return sb.String()
 }
 
 func testAdd(a, b int) int {
