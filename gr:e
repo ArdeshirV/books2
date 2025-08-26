@@ -77,12 +77,7 @@ func mainStandardLib() {
 	fmt.Printf("Index of %s is %v\n", word, index)
 
 	newS := slices.Clone(s)
-	fmt.Println(newS)
-
-	fmt.Print("Enter your name: ")
-	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Scan()
-	fmt.Println("Hello", scanner.Text())
+             fmt.Println(newS)
 }
 
 func testAdd(a, b int) int {
