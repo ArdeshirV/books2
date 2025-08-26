@@ -5,6 +5,7 @@ import (
 	"bufio"
 	"bytes"
 	"context"
+	"log"
 	"reflect"
 	"slices"
 
@@ -74,7 +75,13 @@ func main() {
 	//mainStandardLib()
 	//mainToUpper()
 	//mainDateTime()
-	mainContext()
+	//mainContext()
+	mainLog()
+}
+
+func mainLog() {
+	log.Print("hello", "a", "b", "c")
+	log.Println("hello", "a", "b", "c")
 }
 
 func mainContext() {
