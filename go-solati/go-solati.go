@@ -4,8 +4,10 @@ package main
 import (
 	"bufio"
 	"bytes"
+	"context"
 	"reflect"
 	"slices"
+
 	//"strconv"
 
 	//"go.mongodb.org/mongo-driver/bson"
@@ -71,7 +73,50 @@ func main() {
 	//mainReflectionNew()
 	//mainStandardLib()
 	//mainToUpper()
-	mainDateTime()
+	//mainDateTime()
+	mainContext()
+}
+
+func mainContext() {
+	background := context.Background()
+	ctx, cancel := context.WithCancel(background)
+	go func() {
+		//scanner := bufio.NewScanner(os.Stdin)
+		fmt.Println("Enter exit to finish <x> ")
+		var ch rune
+		fmt.Scanf("%c", &ch)
+		if ch == 'x' {
+			cancel()
+		}
+		//if scanner.Scan() {
+		//	input := scanner.Text()
+		//	if strings.ToLower(strings.TrimSpace(input)) == "x" {
+		//		cancel()
+		//	}
+		//}
+	}()
+	heavyTask(ctx)
+}
+
+func heavyTask(ctx context.Context) {
+	i := 0
+	for {
+		select {
+		case <-ctx.Done():
+			fmt.Println("Task canceled", ctx.Err())
+			return
+		case <-time.After(time.Second * 100000):
+			fmt.Println("Task finished")
+			return
+		default:
+			fmt.Print("\b\b\b\b    \r", strings.Repeat(".", i))
+			time.Sleep(time.Millisecond * 500)
+			i++
+			if i >= 4 {
+				i = 0
+			}
+		}
+	}
 }
 
 func mainDateTime() {
