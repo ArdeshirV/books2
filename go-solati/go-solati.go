@@ -64,11 +64,15 @@ func main() {
 	//mainMongodb()
 	//mainReflection()
 	//mainReadStruct()
-	mainReflectionNew()
+  mainReflectionNew()
 }
 
 func testAdd(a, b int) int {
 	return a + b
+}
+
+func testSub(a, b int) int {
+	return a - b
 }
 
 func mainReflectionNew() {
