@@ -76,12 +76,31 @@ func main() {
 	//mainToUpper()
 	//mainDateTime()
 	//mainContext()
-	mainLog()
+	//mainLog()
+	mainPlugin()
+}
+
+func mainPlugin() {
+	fmt.Println("mainPlugin")
 }
 
 func mainLog() {
-	log.Print("hello", "a", "b", "c")
+	logFileName := "/home/asohishn/Documents/Downloads/go-practice.log"
+	output, err := os.Create(logFileName)
+	if err != nil {
+		log.Fatal("Failed to create log file")
+	}
+	defer output.Close()
+	log.SetFlags(log.Lmicroseconds | log.Lshortfile | log.Ldate)
+	log.SetOutput(output)
+	log.Print(colors.Red, "hello", "a", "b", "c", colors.Normal)
 	log.Println("hello", "a", "b", "c")
+	go func() {
+		for {
+			time.Sleep(time.Second * 1)
+		}
+	}()
+	//log.Panic("Fatal error occured")
 }
 
 func mainContext() {
