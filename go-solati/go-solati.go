@@ -70,7 +70,18 @@ func main() {
 	//mainReadStruct()
 	//mainReflectionNew()
 	//mainStandardLib()
-	mainToUpper()
+	//mainToUpper()
+	mainDateTime()
+}
+
+func mainDateTime() {
+	location, err := time.LoadLocation("Asia/Tehran")
+	if err != nil {
+		panic(err)
+	}
+	t := time.Date(1985, 06, 04, 03, 0, 0, 0, location)
+	fmt.Println(t)
+	fmt.Println(time.Since(t))
 }
 
 func mainStandardLib() {
