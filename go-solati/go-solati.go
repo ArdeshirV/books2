@@ -88,12 +88,6 @@ func mainContext() {
 		if ch == 'x' {
 			cancel()
 		}
-		//if scanner.Scan() {
-		//	input := scanner.Text()
-		//	if strings.ToLower(strings.TrimSpace(input)) == "x" {
-		//		cancel()
-		//	}
-		//}
 	}()
 	heavyTask(ctx)
 }
