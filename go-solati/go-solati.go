@@ -76,8 +76,8 @@ func mainStandardLib() {
 	index := slices.Index(s, word)
 	fmt.Printf("Index of %s is %v\n", word, index)
 
-  m := min(10, 20, 30, 1, 33)
-  fmt.Println(m)
+	m := min(10, 20, 12, -10, -21, 2, 30, 1, 33)
+	fmt.Println(m)
 }
 
 func testAdd(a, b int) int {
