@@ -64,7 +64,13 @@ func main() {
 	//mainMongodb()
 	//mainReflection()
 	//mainReadStruct()
-  mainReflectionNew()
+	//mainReflectionNew()
+	mainStandardLib()
+}
+
+func mainStandardLib() {
+	fmt.Println("Standard Library")
+	// TODO: Add your codes here:
 }
 
 func testAdd(a, b int) int {
