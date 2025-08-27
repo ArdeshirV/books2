@@ -56,7 +56,7 @@ func main() {
 	//mainWriterReader2()
 	//mainFiles()
 	//mainSockets()
-	//mainWebBySockets(/home/asohishn/Documents/Pictures/Mine/Myself/Me/me_final_2024.png)
+	//mainWebBySockets(os.Getenv("HOME") + "/Documents/Pictures/Mine/Myself/Me/me_final_2024.png")
 	//mainWebServerBySockets()
 	//ainWeb1()
 	//mainWebServerByHandleFunc()
@@ -107,7 +107,8 @@ func mainPlugin() {
 }
 
 func mainLog() {
-	logFileName := "/home/asohishn/Documents/Downloads/go-practice.log"
+	logFileName := os.Getenv("HOME") + "/Documents/Downloads/go-practice.log"
+
 	output, err := os.Create(logFileName)
 	if err != nil {
 		log.Fatal("Failed to create log file")
@@ -861,7 +862,7 @@ func handleConnection(conn net.Conn, i int) {
 func mainFiles() {
 	fmt.Println("Files in Golang")
 
-	filename := "/home/asohishn/d/sample-file.txt"
+	filename := os.Getenv("HOME") + "/d/sample-file.txt"
 	fmt.Println("GetPageSize() = ", os.Getpagesize())
 
 	f, err := os.Create(filename)
