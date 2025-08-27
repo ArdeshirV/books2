@@ -120,6 +120,21 @@ func NewCarBuilder() *CarBuilder {
 	return &CarBuilder{}
 }
 
+func (cb *CarBuilder) SetName(name string) *CarBuilder {
+	cb.car.name = name
+	return cb
+}
+
+func (cb *CarBuilder) SetColor(color string) *CarBuilder {
+	cb.car.color = color
+	return cb
+}
+
+func (cb *CarBuilder) SetYear(year int) *CarBuilder {
+	cb.car.year = year
+	return cb
+}
+
 func (cb *CarBuilder) Build() *car {
 	return &cb.car
 }
