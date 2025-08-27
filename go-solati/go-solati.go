@@ -80,11 +80,11 @@ func main() {
 	//mainLog()
 	//mainPlugin()
 	//mainZipArchive()
-  mainNext()
+	mainNext()
 }
 
 func mainNext() {
-  // TODO: add your new code here
+	// TODO: add your new code here
 }
 
 func mainZipArchive() {
