@@ -82,6 +82,7 @@ func main() {
 
 func mainPlugin() {
 	fmt.Println("mainPlugin")
+	// TODO: Add your code here
 }
 
 func mainLog() {
@@ -152,7 +153,6 @@ func mainDateTime() {
 }
 
 func mainStandardLib() {
-	// TODO: Add your codes here:
 	word := "Iran"
 	s := []string{"Hello", "Hi", "Ardeshir", "Iran", "Azadi"}
 	index := slices.Index(s, word)
