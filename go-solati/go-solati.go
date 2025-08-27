@@ -295,7 +295,7 @@ func testSub(a, b int) int {
 }
 
 func mainReflectionNew() {
-	fmt.Printf(colors.YellowBoldText("Reflection New\n"))
+	fmt.Print(colors.YellowBoldText("Reflection New\n"))
 	someVar := 239.00434
 	v := reflect.ValueOf(&someVar).Elem()
 	t := reflect.TypeOf(someVar)
@@ -351,7 +351,7 @@ func ReadStruct(s any) (string, error) {
 }
 
 func mainReflection() {
-	fmt.Printf(colors.MagentaBoldText("Reflection is here\n"))
+	fmt.Print(colors.MagentaBoldText("Reflection is here\n"))
 	data := User{Name: "Ardeshir", Address: "something@somewhere.com"}
 	v := reflect.ValueOf(data)
 	t := reflect.TypeOf(data)
@@ -487,7 +487,7 @@ func mainPrepare() {
 	if err = db.Ping(); err != nil {
 		panic(err)
 	}
-	fmt.Printf(colors.YellowBoldText("Connected to database successfully.\n"))
+	fmt.Print(colors.YellowBoldText("Connected to database successfully.\n"))
 
 	stm, err := db.Prepare("INSERT INTO users(name, email) VALUES(?, ?) ")
 	if err != nil {
@@ -552,7 +552,7 @@ func mainCreateTableQuery() {
 	if _, err = db.Exec(mysqlQuery); err != nil {
 		panic(err)
 	}
-	fmt.Printf(colors.GreenBoldText("The table has beend created successfully.\n"))
+	fmt.Print(colors.GreenBoldText("The table has beend created successfully.\n"))
 }
 
 type DataConnection struct {
