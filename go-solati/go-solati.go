@@ -2,6 +2,7 @@
 package main
 
 import (
+	"archive/zip"
 	"bufio"
 	"bytes"
 	"context"
@@ -77,7 +78,27 @@ func main() {
 	//mainDateTime()
 	//mainContext()
 	//mainLog()
-	mainPlugin()
+	//mainPlugin()
+	mainZipArchive()
+}
+
+func mainZipArchive() {
+	homeDir := os.Getenv("HOME")
+	zipFileName := homeDir + "/Documents/Downloads/go.zip"
+	zipFile, err := os.Create(zipFileName)
+	if err != nil {
+		panic(err)
+	}
+	defer zipFile.Close()
+
+	zipWriter := zip.NewWriter(zipFile)
+	defer zipWriter.Close()
+
+	file, err := zipWriter.Create("test.txt")
+	if err != nil {
+		panic(err)
+	}
+	file.Write([]byte("This is a sample text file that is created in Go programming language"))
 }
 
 func mainPlugin() {
