@@ -90,8 +90,21 @@ func mainDesignPattern() {
 }
 
 func Builder() {
-	fmt.Println(colors.GreenBoldText("Builder Design Pattern"))
-	//car := NewCarBuilder().SetName()
+	fmt.Println(Prompt("Builder Design Pattern"))
+	car := NewCarBuilder().SetName("Pride").SetColor("White").SetYear(1404).Build()
+	fmt.Println(Out(car))
+}
+
+func Prompt(text string) string {
+	return colors.WhiteBoldText(fmt.Sprintf("%v", text))
+}
+
+func In(text string) string {
+	return colors.GreenBoldText(fmt.Sprintf("%v", text))
+}
+
+func Out(text any) string {
+	return colors.MagentaBoldText(fmt.Sprintf("%v", text))
 }
 
 type car struct {
