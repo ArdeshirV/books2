@@ -80,7 +80,41 @@ func main() {
 	//mainLog()
 	//mainPlugin()
 	//mainZipArchive()
-	mainNext()
+	//mainNext()
+	mainDesignPattern()
+}
+
+func mainDesignPattern() {
+	Factory()
+}
+
+func Factory() {
+	e := CreateE()
+	fmt.Println(e)
+}
+
+func CreateE() E {
+	a := A{'A'}
+	b := B{a}
+	c := C{b}
+	d := D{c}
+	return E{d}
+}
+
+type A struct {
+	r rune
+}
+type B struct {
+	A A
+}
+type C struct {
+	B B
+}
+type D struct {
+	C C
+}
+type E struct {
+	D D
 }
 
 func mainNext() {
