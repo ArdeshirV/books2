@@ -86,6 +86,41 @@ func main() {
 
 func mainDesignPattern() {
 	Factory()
+	Builder()
+}
+
+func Builder() {
+	// TODO: add your new code here
+}
+
+type car struct {
+	color string
+	name  string
+	year  int
+}
+
+func (c *car) GetColor() string {
+	return c.color
+}
+
+func (c *car) GetName() string {
+	return c.name
+}
+
+func (c *car) GetYear() int {
+	return c.year
+}
+
+type CarBuilder struct {
+	car car
+}
+
+func NewCarBuilder() *CarBuilder {
+	return &CarBuilder{}
+}
+
+func (cb *CarBuilder) Build() *car {
+	return &cb.car
 }
 
 func Factory() {
@@ -260,7 +295,7 @@ func testSub(a, b int) int {
 }
 
 func mainReflectionNew() {
-	fmt.Printf("%sReflection New%s\n", colors.BoldYellow, colors.Normal)
+	fmt.Printf(colors.YellowBoldText("Reflection New\n"))
 	someVar := 239.00434
 	v := reflect.ValueOf(&someVar).Elem()
 	t := reflect.TypeOf(someVar)
@@ -316,7 +351,7 @@ func ReadStruct(s any) (string, error) {
 }
 
 func mainReflection() {
-	fmt.Printf("%sReflection is here%s\n", colors.BoldMagenta, colors.Normal)
+	fmt.Printf(colors.MagentaBoldText("Reflection is here\n"))
 	data := User{Name: "Ardeshir", Address: "something@somewhere.com"}
 	v := reflect.ValueOf(data)
 	t := reflect.TypeOf(data)
@@ -452,7 +487,7 @@ func mainPrepare() {
 	if err = db.Ping(); err != nil {
 		panic(err)
 	}
-	fmt.Printf("%sConnected to database successfully.%s\n", colors.BoldYellow, colors.Normal)
+	fmt.Printf(colors.YellowBoldText("Connected to database successfully.\n"))
 
 	stm, err := db.Prepare("INSERT INTO users(name, email) VALUES(?, ?) ")
 	if err != nil {
@@ -474,8 +509,8 @@ func mainPrepare() {
 	}
 
 	fmt.Printf("%sname: %s%s%s, %semail: %s%s%s\n",
-		colors.Bold, colors.BoldMagenta, name, colors.Normal,
-		colors.Bold, colors.BoldMagenta, email, colors.Normal)
+		colors.Bold, colors.MagentaBold, name, colors.Normal,
+		colors.Bold, colors.MagentaBold, email, colors.Normal)
 
 	result, err = db.Exec("UPDATE users SET email = 'myemail@gmailx.com' WHERE id = 1")
 	if err != nil {
@@ -490,8 +525,8 @@ func mainPrepare() {
 
 	fmt.Println("After modifications:")
 	fmt.Printf("%sname: %s%s%s, %semail: %s%s%s\n",
-		colors.Bold, colors.BoldMagenta, name, colors.Normal,
-		colors.Bold, colors.BoldMagenta, email, colors.Normal)
+		colors.Bold, colors.MagentaBold, name, colors.Normal,
+		colors.Bold, colors.MagentaBold, email, colors.Normal)
 }
 
 const mysqlQuery = `
@@ -517,8 +552,7 @@ func mainCreateTableQuery() {
 	if _, err = db.Exec(mysqlQuery); err != nil {
 		panic(err)
 	}
-	fmt.Printf("%sThe table has beend created successfully.%s\n",
-		colors.BoldGreen, colors.Normal)
+	fmt.Printf(colors.GreenBoldText("The table has beend created successfully.\n"))
 }
 
 type DataConnection struct {
@@ -587,7 +621,7 @@ func mainMySQLtest() {
 		panic(err)
 	}
 	fmt.Printf("%sConnected to database successfully%s\n",
-		colors.BoldMagenta, colors.Normal)
+		colors.MagentaBold, colors.Normal)
 }
 
 type User struct {
