@@ -79,7 +79,12 @@ func main() {
 	//mainContext()
 	//mainLog()
 	//mainPlugin()
-	mainZipArchive()
+	//mainZipArchive()
+  mainNext()
+}
+
+func mainNext() {
+  // TODO: add your new code here
 }
 
 func mainZipArchive() {
@@ -103,7 +108,6 @@ func mainZipArchive() {
 
 func mainPlugin() {
 	fmt.Println("mainPlugin")
-	// TODO: Add your code here
 }
 
 func mainLog() {
