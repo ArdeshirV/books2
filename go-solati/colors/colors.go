@@ -64,27 +64,27 @@ func BoldText(text string) string {
 }
 
 func RedBoldText(text string) string {
-  return Red + text + Normal
+  return RedBold + text + Normal
 }
 
 func BlueBoldText(text string) string {
-  return Blue + text + Normal
+  return BlueBold + text + Normal
 }
 
 func TealBoldText(text string) string {
-  return Teal + text + Normal
+  return TealBold + text + Normal
 }
 
 func GreenBoldText(text string) string {
-  return Green + text + Normal
+  return GreenBold + text + Normal
 }
 
 func YellowBoldText(text string) string {
-  return Yellow + text + Normal 
+  return YellowBold + text + Normal 
 }
 
 func MagentaBoldText(text string) string {
-  return Magenta + text + Normal 
+  return MagentaBold + text + Normal 
 }
 
 

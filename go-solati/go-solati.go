@@ -90,7 +90,8 @@ func mainDesignPattern() {
 }
 
 func Builder() {
-	// TODO: add your new code here
+	fmt.Println(colors.GreenBoldText("Builder Design Pattern"))
+	//car := NewCarBuilder().SetName()
 }
 
 type car struct {
@@ -153,7 +154,6 @@ type E struct {
 }
 
 func mainNext() {
-	// TODO: add your new code here
 }
 
 func mainZipArchive() {
