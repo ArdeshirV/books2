@@ -43,3 +43,4 @@ ENTRYPOINT ["./app"]
 # docker build -t my-golang-upx-app .
 # docker run --rm my-golang-upx-app
 
+
