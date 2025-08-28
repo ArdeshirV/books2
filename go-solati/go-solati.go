@@ -92,7 +92,6 @@ func mainDesignPattern() {
 }
 
 func Adapter() {
-
 }
 
 func Singleton() {
