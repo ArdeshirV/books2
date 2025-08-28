@@ -87,6 +87,7 @@ func main() {
 func mainDesignPattern() {
 	Factory()
 	Builder()
+	// TODO: Add your new code here
 }
 
 func Builder() {
@@ -111,6 +112,10 @@ type car struct {
 	color string
 	name  string
 	year  int
+}
+
+func (c car) String() string {
+	return fmt.Sprintf("Name: %s, Color: %s, Year: %d", c.name, c.color, c.year)
 }
 
 func (c *car) GetColor() string {
