@@ -87,7 +87,54 @@ func main() {
 func mainDesignPattern() {
 	Factory()
 	Builder()
-	// TODO: Add your new code here
+	Singleton()
+}
+
+func Singleton() {
+	GetEmail()
+	SetEmail()
+}
+
+type CacheManager struct {
+	cache map[string]any
+	mutex sync.RWMutex
+}
+
+var instance *CacheManager
+var once sync.Once
+
+func GetCacheManager() *CacheManager {
+	once.Do(func() {
+		instance = &CacheManager{
+			cache: make(map[string]any),
+		}
+	})
+	return instance
+}
+
+func (cm *CacheManager) Set(key string, value any) {
+	cm.mutex.Lock()
+	defer cm.mutex.Unlock()
+	cm.cache[key] = value
+}
+
+func (cm *CacheManager) Get(key string) (any, bool) {
+	cm.mutex.RLock()
+	defer cm.mutex.RUnlock()
+	value, ok := cm.cache[key]
+	return value, ok
+}
+
+func GetEmail() {
+	cache := GetCacheManager()
+	cache.Set("email", "ArdeshirV@protonmail.com")
+}
+
+func SetEmail() {
+	cache := GetCacheManager()
+	value, ok := cache.Get("email")
+	email := value.(string)
+	fmt.Println(Prompt("Email:"), Out(fmt.Sprintf("%v %v", email, ok)))
 }
 
 func Builder() {
