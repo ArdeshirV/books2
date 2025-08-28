@@ -3,7 +3,8 @@ FROM golang:latest as builder
 WORKDIR /app
 COPY . .
 RUN go build -ldflags "-w -s" -o app .
-RUN upx app
+#RUN pkg install -y upx
+#RUN upx app
 
 # Run stage
 FROM alpine:latest
