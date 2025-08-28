@@ -21,6 +21,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o app .
 RUN upx --best --lzma app
 
 
+
 # --- Final stage (minimal image) ---
 FROM scratch
 
@@ -32,9 +33,14 @@ COPY --from=builder /app/app .
 # If you have configs/assets to copy, do it here:
 # COPY --from=builder /app/assets ./assets
 
+EXPOSE 64640
+
 # Run the binary
 ENTRYPOINT ["./app"]
+
+
 
 ## To Build and Run:
 # docker build -t my-golang-upx-app .
 # docker run --rm my-golang-upx-app
+
