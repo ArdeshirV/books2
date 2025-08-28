@@ -88,6 +88,11 @@ func mainDesignPattern() {
 	Factory()
 	Builder()
 	Singleton()
+	Adapter()
+}
+
+func Adapter() {
+
 }
 
 func Singleton() {
