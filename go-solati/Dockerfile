@@ -1,11 +1,12 @@
 # Build stage
-FROM golang:1.25 as builder
+FROM golang:latest as builder
 WORKDIR /app
 COPY . .
-RUN go build -o app .
+RUN go build -ldflags "-w -s" -o app .
+RUN upx app
 
 # Run stage
-FROM debian:bullseye-slim
+FROM alpine:latest
 WORKDIR /app
 COPY --from=builder /app/app .
 EXPOSE 8080
