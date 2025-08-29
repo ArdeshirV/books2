@@ -9,8 +9,8 @@ WORKDIR /app
 
 # Add go mod files and download dependencies early for Docker cache
 #COPY go.mod go.sum ./
-COPY go.mod ./
-RUN go get 
+#COPY go.mod ./
+#RUN go get 
 
 # Copy the rest of your app
 COPY . .
