@@ -15,10 +15,10 @@ RUN go mod download
 COPY . .
 
 # Build the binary (statically linked for scratch image)
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o app .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o docker-test .
 
 # Compress the binary with UPX
-RUN upx --best --lzma app
+RUN upx --best --lzma docker-test
 
 
 
@@ -28,7 +28,7 @@ FROM scratch
 WORKDIR /app
 
 # Copy the binary from builder
-COPY --from=builder /app/app .
+COPY --from=builder /app/docker-test .
 
 # If you have configs/assets to copy, do it here:
 # COPY --from=builder /app/assets ./assets
@@ -36,7 +36,7 @@ COPY --from=builder /app/app .
 EXPOSE 64640
 
 # Run the binary
-ENTRYPOINT ["./app"]
+ENTRYPOINT ["./docker-test"]
 
 
 ## To Build and Run:
