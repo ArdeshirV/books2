@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-    fmt.Println("\034[1;33mThe Go Programming Language\033[0m")
+    fmt.Println("\033[1;34mThe Go Programming Language\033[0m")
 }
