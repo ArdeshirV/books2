@@ -92,6 +92,7 @@ func mainDesignPattern() {
 }
 
 func Adapter() {
+    fmt.Println(Prompt("Adapter Design Pattern"))
 }
 
 func Singleton() {
