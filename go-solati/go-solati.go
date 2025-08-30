@@ -81,7 +81,12 @@ func main() {
 	//mainPlugin()
 	//mainZipArchive()
 	//mainNext()
-	mainDesignPattern()
+	//mainDesignPattern()
+	mainDataStructures()
+}
+
+func mainDataStructures() {
+	fmt.Println(Prompt("Data Structures"))
 }
 
 func mainDesignPattern() {
