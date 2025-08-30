@@ -5,6 +5,7 @@ import (
 	"archive/zip"
 	"bufio"
 	"bytes"
+	"container/list"
 	"context"
 	"log"
 	"reflect"
@@ -87,6 +88,14 @@ func main() {
 
 func mainDataStructures() {
 	fmt.Println(Prompt("Data Structures"))
+	usingList()
+}
+
+func usingList() {
+	l := list.New()
+	l.PushBack(4)
+	l.PushFront(1)
+	fmt.Println(colors.MagentaBold, *l, colors.Normal)
 }
 
 func mainDesignPattern() {
