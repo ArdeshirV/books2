@@ -95,7 +95,7 @@ func usingList() {
 	l := list.New()
 	l.PushBack(4)
 	l.PushFront(1)
-	fmt.Println(colors.MagentaBold, *l, colors.Normal)
+	fmt.Print(colors.MagentaBold, *l, colors.Normal)
 }
 
 func mainDesignPattern() {
