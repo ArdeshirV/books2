@@ -89,11 +89,15 @@ func mainDesignPattern() {
 	Builder()
 	Singleton()
 	Adapter()
+	Observer()
 }
 
 func Adapter() {
 	fmt.Println(Prompt("Adapter Design Pattern"))
+}
 
+func Observer() {
+	fmt.Println(Prompt("Observer Design Pattern"))
 }
 
 func Singleton() {
